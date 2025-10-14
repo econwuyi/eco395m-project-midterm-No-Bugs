@@ -21,6 +21,26 @@ def scrape_usnews_top50():
     soup = BeautifulSoup(response.text, "lxml")
     print("Page fetched and parsed successfully")
 
+    schools = []
+
+    for i, block in enumerate(soup.select("div.Block-fIczTy")):
+        if i >= 50:  # Limit to top 50 universities
+            break
+
+        name = block.select_one("h3.Heading-sc-1w5vxk2-0")
+        rank = block.select_one("span.RankList_rank__G2awV")
+        tuition = block.find(string=lambda t: "Tuition" in t or "")
+        sat = block.find(string=lambda t: "SAT" in t or "")
+
+        if name and rank:
+            schools.append({
+                "School": name.text.strip(),
+                "Rank": rank.text.strip("#"),
+                "Tuition": tuition.strip() if tuition else "",
+                "SAT_Range": sat.strip() if sat else ""
+            })
+
+    print(f"Extracted {len(schools)} schools (Top 50)")
 
 if __name__ == "__main__":
     scrape_usnews_top50()
