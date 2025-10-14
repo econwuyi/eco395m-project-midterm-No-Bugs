@@ -42,6 +42,11 @@ def scrape_usnews_top50():
 
     print(f"Extracted {len(schools)} schools (Top 50)")
 
+    df = pd.DataFrame(schools)
+    df.to_csv("./artifacts/usnews_top50.csv", index=False)
+    print(f"Saved {len(df)} records to ./artifacts/usnews_top50.csv")
+
+
 if __name__ == "__main__":
     scrape_usnews_top50()
 
