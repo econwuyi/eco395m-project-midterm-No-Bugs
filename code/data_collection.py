@@ -302,7 +302,7 @@ def fetch_usnews_rankings():
         "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
     }
     
-    base_url = "https://www.usnews.com/best-colleges/api/search?_sort=schoolName&_sortDirection=asc&_page="
+    base_url = "https://www.usnews.com/best-colleges/api/search?_sort=ranking.sortRank&_sortDirection=asc&_page="
     
     all_schools_data = []
     max_schools = 50

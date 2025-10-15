@@ -1,51 +1,51 @@
 institution.displayName,institution.state,ranking.displayRank,ranking.sortRank,ranking.isTied
-Aaniiih Nakoda College,MT,Unranked,-2,False
-Abilene Christian University,TX,#329,329,True
-Abraham Baldwin Agricultural College,GA,#50,50,True
-Academy of Art University,CA,#105-115,-1,False
-Adams State University,CO,#102,102,False
-Adelphi University,NY,#198,198,True
-Adrian College,MI,#30,30,True
-AdventHealth University,FL,Unranked,-2,False
-Agnes Scott College,GA,#67,67,True
-Alabama A&M University,AL,#96,96,True
-Alabama State University,AL,#395-434,-1,False
-Alaska Pacific University,AK,#32,32,False
-Albany College of Pharmacy and Health Sciences,NY,Unranked,-2,False
-Albany State University,GA,#90,90,True
-Albertus Magnus College,CT,#98,98,True
-Albion College,MI,#131,131,True
-Albizu University,PR,Unranked,-2,False
-Albizu University--Miami,FL,Unranked,-2,False
-Albright College,PA,#170,170,True
-Alcorn State University,MS,#45,45,True
-Alfred State College--SUNY,NY,#16,16,False
-Alfred University,NY,#61,61,True
-Alice Lloyd College,KY,#33,33,True
-Allegheny College,PA,#76,76,True
-Allen College,IA,Unranked,-2,False
-Allen University,SC,#183-201,-1,False
-Alliant International University,CA,Unranked,-2,False
-Alma College,MI,#6,6,False
-Alvernia University,PA,#352,352,True
-Alverno College,WI,#84,84,True
-American International College,MA,#395-434,-1,False
-American University,DC,#88,88,True
-American University of Health Sciences,CA,Unranked,-2,False
-Amherst College,MA,#2,2,False
-Ana G. Mendez University,PR,Unranked,-2,False
-Anderson University (IN),IN,#78,78,True
-Anderson University (SC),SC,#31,31,True
-Andrews University,MI,#242,242,True
-Angelo State University,TX,#56,56,True
-Anna Maria College,MA,#150-164,-1,False
-Antelope Valley College,CA,Unranked,-2,False
-Antioch College,OH,#183-201,-1,False
-Appalachian Bible College,WV,Unranked,-2,False
-Appalachian State University,NC,#3,3,False
-Aquinas College,MI,#146,146,True
-Arcadia University,PA,#76,76,True
-Arizona Christian University,AZ,#26,26,False
-Arizona College of Nursing,AZ,Unranked,-2,False
-Arizona College of Nursing--Las Vegas,NV,Unranked,-2,False
-Arizona State University,AZ,#117,117,True
+Princeton University,NJ,#1,1,False
+Massachusetts Institute of Technology,MA,#2,2,False
+Harvard University,MA,#3,3,False
+Stanford University,CA,#4,4,True
+Yale University,CT,#4,4,True
+University of Chicago,IL,#6,6,False
+Duke University,NC,#7,7,True
+Johns Hopkins University,MD,#7,7,True
+Northwestern University,IL,#7,7,True
+University of Pennsylvania,PA,#7,7,True
+California Institute of Technology,CA,#11,11,False
+Cornell University,NY,#12,12,False
+Brown University,RI,#13,13,True
+Dartmouth College,NH,#13,13,True
+Columbia University,NY,#15,15,True
+"University of California, Berkeley",CA,#15,15,True
+Rice University,TX,#17,17,True
+"University of California, Los Angeles",CA,#17,17,True
+Vanderbilt University,TN,#17,17,True
+Carnegie Mellon University,PA,#20,20,True
+University of Michigan--Ann Arbor,MI,#20,20,True
+University of Notre Dame,IN,#20,20,True
+Washington University in St. Louis,MO,#20,20,True
+Emory University,GA,#24,24,True
+Georgetown University,DC,#24,24,True
+University of North Carolina--Chapel Hill,NC,#26,26,True
+University of Virginia,VA,#26,26,True
+University of Southern California,CA,#28,28,False
+University of California San Diego,CA,#29,29,False
+University of Florida,FL,#30,30,True
+The University of Texas--Austin,TX,#30,30,True
+Georgia Institute of Technology,GA,#32,32,True
+New York University,NY,#32,32,True
+"University of California, Davis",CA,#32,32,True
+"University of California, Irvine",CA,#32,32,True
+Boston College,MA,#36,36,True
+Tufts University,MA,#36,36,True
+University of Illinois Urbana-Champaign,IL,#36,36,True
+University of Wisconsin--Madison,WI,#36,36,True
+"University of California, Santa Barbara",CA,#40,40,False
+The Ohio State University,OH,#41,41,False
+Boston University,MA,#42,42,True
+Rutgers University--New Brunswick,NJ,#42,42,True
+"University of Maryland, College Park",MD,#42,42,True
+University of Washington,WA,#42,42,True
+Lehigh University,PA,#46,46,True
+Northeastern University,MA,#46,46,True
+Purdue University--Main Campus,IN,#46,46,True
+University of Georgia,GA,#46,46,True
+University of Rochester,NY,#46,46,True
