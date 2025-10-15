@@ -360,7 +360,7 @@ def save_rankings_data(schools_data):
         "ranking.isTied"
     ]
     
-    output_dir = "../data/raw"
+    output_dir = "artifacts"
     output_file = "usnews_top50.csv"
     full_path = os.path.join(output_dir, output_file)
     
@@ -375,7 +375,7 @@ def save_rankings_data(schools_data):
     return full_path
 
 
-def main():
+def ranking_state():
     """Main function to run data collection"""
     data = fetch_usnews_rankings()
     if data:
