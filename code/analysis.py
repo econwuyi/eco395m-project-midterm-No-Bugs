@@ -57,7 +57,3 @@ def run_regressions(data_path='artifacts/cleaned_merged_dataset.csv', output_pat
 
     # Save the result to CSV
     combined_table.to_csv(output_path)
-
-# Run the function
-if __name__ == "__main__":
-    run_regressions()
