@@ -160,131 +160,16 @@ def scrape_puh_rankings(
 
     return output_file
 
+import requests
+import csv
+import os
 
-
-def scrape_usnews_sat_tuition(
-        
-url="https://www.usnews.com/best-colleges/rankings/national-universities",
-        output_file="artifacts/sat_tuition.csv"):
-    """
-    Scrapes tuition fees and SAT score ranges for the Top 50 U.S. News 
-2026
-    Best National Universities and saves them to a CSV file.
-
-    Args:
-        url (str): The targeted U.S. News URL.
-        output_file (str): The path to save the output CSV.
-
-    Returns:
-        str: Path of the saved CSV.
-    """
-    
-
-    headers = {"User-Agent": "Mozilla/5.0"}
-    response = requests.get(url, headers=headers)
-    response.raise_for_status()
-
-    soup = BeautifulSoup(response.content, "html.parser")
-    universities = []
-    cards = soup.select("div.Block-flzCty")
-
-    for i, block in enumerate(cards[:50]):  # limit to top 50
-        name_el = block.select_one("h3.Heading-sc-1w5vxap-0")
-        rank_el = block.select_one("span.RankList_rank__G2aWY")
-        tuition_el = block.find(string=lambda t: "Tuition" in t or "")
-        sat_el = block.find(string=lambda t: "SAT" in t or "")
-
-        name = name_el.get_text(strip=True) if name_el else "N/A"
-        rank = rank_el.get_text(strip=True) if rank_el else "N/A"
-        tuition = tuition_el.strip() if tuition_el else "N/A"
-        sat = sat_el.strip() if sat_el else "N/A"
-
-        universities.append({
-            "University": name,
-            "Rank": rank,
-            "Tuition": tuition,
-            "SAT_Range": sat
-        })
-
-    df = pd.DataFrame(universities)
-    df.to_csv(output_file, index=False, encoding="utf-8")
-    print(f"Scraped {len(df)} universities. Data saved to '{output_file}'.")
-    return output_file
-
-
-def scrape_college_earnings():
-    URL = "https://www.collegetransitions.com/dataverse/graduate-earnings/?utm_source=chatgpt.com"
-    TARGET_COLUMN_INSTITUTION = "Institution"
-    TARGET_COLUMN_EARNINGS = "Median Earnings - 6 Years Post-Entry (Scorecard)"
-    OUTPUT_FILENAME = "artifacts/graduate_earnings_data.csv"
-
-    print("Fetching web content...")
-
-    headers = {
-        "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.0.0 Safari/537.36",
-        "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
-        "Accept-Language": "en-US,en;q=0.5",
-        "Connection": "keep-alive",
-        "Referer": "https://www.google.com/",
-        "Upgrade-Insecure-Requests": "1"
-    }
-
-    try:
-        response = requests.get(URL, headers=headers, timeout=15)
-        response.raise_for_status()
-
-        print("Parsing tables from web page...")
-        tables = pd.read_html(response.text)
-
-        if not tables:
-            print("Error: No tables found on the web page.")
-            return
-
-        df = tables[0]
-        required_columns = [TARGET_COLUMN_INSTITUTION, TARGET_COLUMN_EARNINGS]
-        missing_columns = [col for col in required_columns if col not in df.columns]
-
-        if missing_columns:
-            print(f"Initial table is missing required columns. Trying other tables...")
-            for table in tables:
-                if TARGET_COLUMN_INSTITUTION in table.columns and TARGET_COLUMN_EARNINGS in table.columns:
-                    df = table
-                    break
-            else:
-                print("Error: Could not find a table containing the required columns.")
-                return
-
-        result_df = df[[TARGET_COLUMN_INSTITUTION, TARGET_COLUMN_EARNINGS]].dropna(how="all")
-
-        print("Cleaning earnings data by removing '$' and converting to numeric...")
-        result_df[TARGET_COLUMN_EARNINGS] = (
-            result_df[TARGET_COLUMN_EARNINGS]
-            .astype(str)
-            .str.replace("$", "", regex=False)
-            .str.replace(",", "", regex=False)
-        )
-
-        result_df[TARGET_COLUMN_EARNINGS] = pd.to_numeric(result_df[TARGET_COLUMN_EARNINGS], errors="coerce")
-        result_df = result_df.dropna(subset=[TARGET_COLUMN_EARNINGS]).reset_index(drop=True)
-
-        result_df.to_csv(OUTPUT_FILENAME, index=False)
-        print(" Scraping successful!")
-        print(f" Data saved to file: {OUTPUT_FILENAME}")
-        print(result_df.head())
-
-    except Exception as e:
-        print(f" Error: {e}")
-
-
-
-def ranking_state():
+def collect_sat_tuition():
     """Scrape top 50 school rankings from US News API and save to CSV"""
     fields = [
         "institution.displayName",
-        "institution.state",
-        "ranking.displayRank",
-        "ranking.sortRank",
-        "ranking.isTied"
+        "searchData.tuition.rawValue",
+        "searchData.satAvg.rawValue"
     ]
 
     headers = {
@@ -293,7 +178,7 @@ def ranking_state():
 
     base_url = "https://www.usnews.com/best-colleges/api/search?_sort=ranking.sortRank&_sortDirection=asc&_page="
     output_dir = "artifacts"
-    output_file = "usnews_top50.csv"
+    output_file = "tuition&sat_top50.csv"
     full_path = os.path.join(output_dir, output_file)
     max_schools = 50
     page = 1
@@ -352,7 +237,9 @@ def ranking_state():
             writer.writeheader()
             writer.writerows(all_schools_data)
         print(f"Saved data to: {full_path}")
-        print("Step 1 completed successfully")
+        print("Data collection completed successfully")
     else:
-        print("Step 1 failed: No data collected")
+        print("Data collection failed: No data collected")
 
+if __name__ == "__main__":
+    collect_sat_tuition()
