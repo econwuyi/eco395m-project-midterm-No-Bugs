@@ -221,3 +221,4 @@ if __name__ == "__main__":
     # Adjust the path to match your Downloads folder
     csv_path = '~/Downloads/cleaned_merged_dataset.csv'
     generate_plots(csv_path)
+    combined_table.to_csv(output_path)

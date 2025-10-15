@@ -1,0 +1,9 @@
+,coef,std err,z,P>|z|,[0.025,0.975],Model,R-squared,Adj. R-squared,Model_Type
+Intercept,166200.0,72200.0,2.301,0.021,24600.0,308000.0,OLS with State Clustering (avgrk),0.320791321097014,0.24801896264312262,avgrk
+avgrk,-2684.1766,1627.151,-1.65,0.099,-5873.334,504.981,OLS with State Clustering (avgrk),0.320791321097014,0.24801896264312262,avgrk
+tuition,-1.0786,1.012,-1.066,0.286,-3.062,0.905,OLS with State Clustering (avgrk),0.320791321097014,0.24801896264312262,avgrk
+avgrk:tuition,0.0326,0.023,1.426,0.154,-0.012,0.077,OLS with State Clustering (avgrk),0.320791321097014,0.24801896264312262,avgrk
+Intercept,-761100.0,333000.0,-2.287,0.022,-1410000.0,-109000.0,OLS with State Clustering (sat_score),0.3779972409255644,0.31135408816758914,sat_score
+sat_score,628.7818,251.685,2.498,0.012,135.487,1122.076,OLS with State Clustering (sat_score),0.3779972409255644,0.31135408816758914,sat_score
+tuition,9.9149,4.595,2.158,0.031,0.909,18.921,OLS with State Clustering (sat_score),0.3779972409255644,0.31135408816758914,sat_score
+sat_score:tuition,-0.0075,0.003,-2.188,0.029,-0.014,-0.001,OLS with State Clustering (sat_score),0.3779972409255644,0.31135408816758914,sat_score

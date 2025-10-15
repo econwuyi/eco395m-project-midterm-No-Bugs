@@ -2,7 +2,8 @@ import requests
 from bs4 import BeautifulSoup
 import re
 import csv
-
+import pandas as pd
+import os
 
 def scrape_puh_rankings(
         url="https://publicuniversityhonors.com/us-news-rankings-2025-which-universities-have-gained-or-lost-the-most-since-2018/",
@@ -160,65 +161,93 @@ def scrape_puh_rankings(
     return output_file
 
 
+def collect_sat_tuition():
+    """Scrape top 50 school rankings from US News API and save to CSV"""
+    fields = [
+        "institution.displayName",
+        "searchData.tuition.rawValue",
+        "searchData.satAvg.rawValue"
+    ]
 
-def scrape_usnews_sat_tuition(
-        
-url="https://www.usnews.com/best-colleges/rankings/national-universities",
-        output_file="artifacts/sat_tuition.csv"):
-    """
-    Scrapes tuition fees and SAT score ranges for the Top 50 U.S. News 
-2026
-    Best National Universities and saves them to a CSV file.
+    headers = {
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
+    }
 
-    Args:
-        url (str): The targeted U.S. News URL.
-        output_file (str): The path to save the output CSV.
+    base_url = "https://www.usnews.com/best-colleges/api/search?_sort=ranking.sortRank&_sortDirection=asc&_page="
+    output_dir = "artifacts"
+    output_file = "tuition&sat_top50.csv"
+    full_path = os.path.join(output_dir, output_file)
+    max_schools = 50
+    page = 1
+    all_schools_data = []
 
-    Returns:
-        str: Path of the saved CSV.
-    """
-    import requests
-    from bs4 import BeautifulSoup
-    import pandas as pd
+    print("Starting US News data collection...")
 
-    headers = {"User-Agent": "Mozilla/5.0"}
-    response = requests.get(url, headers=headers)
-    response.raise_for_status()
+    # Helper function to traverse nested dictionary
+    def traverse(root, path):
+        value = root
+        for segment in path.split("."):
+            if segment.isdigit():
+                value = value[int(segment)] if len(value) > int(segment) else None
+            else:
+                value = value.get(segment, None)
+        return value
 
-    soup = BeautifulSoup(response.content, "html.parser")
-    universities = []
-    cards = soup.select("div.Block-flzCty")
+    # Fetch data
+    while len(all_schools_data) < max_schools:
+        url = f"{base_url}{page}"
+        print(f"Fetching page {page}...")
 
-    for i, block in enumerate(cards[:50]):  # limit to top 50
-        name_el = block.select_one("h3.Heading-sc-1w5vxap-0")
-        rank_el = block.select_one("span.RankList_rank__G2aWY")
-        tuition_el = block.find(string=lambda t: "Tuition" in t or "")
-        sat_el = block.find(string=lambda t: "SAT" in t or "")
+        try:
+            resp = requests.get(url, headers=headers, timeout=10)
+            print(f"Response status: {resp.status_code}")
 
-        name = name_el.get_text(strip=True) if name_el else "N/A"
-        rank = rank_el.get_text(strip=True) if rank_el else "N/A"
-        tuition = tuition_el.strip() if tuition_el else "N/A"
-        sat = sat_el.strip() if sat_el else "N/A"
+            if resp.status_code != 200:
+                break
 
-        universities.append({
-            "University": name,
-            "Rank": rank,
-            "Tuition": tuition,
-            "SAT_Range": sat
-        })
+            json_data = resp.json()
+            items = json_data.get("data", {}).get("items", [])
+            print(f"Found {len(items)} schools on page {page}")
 
-    df = pd.DataFrame(universities)
-    df.to_csv(output_file, index=False, encoding="utf-8")
-    print(f"Scraped {len(df)} universities. Data saved to 
-'{output_file}'.")
-    return output_file
+            if not items:
+                break
 
+            for school in items:
+                if len(all_schools_data) >= max_schools:
+                    break
+                row = {field: traverse(school, field) for field in fields}
+                all_schools_data.append(row)
 
-import pandas as pd
-import requests
+            page += 1
+
+        except Exception as e:
+            print(f"Error: {e}")
+            break
+
+    print(f"Collected {len(all_schools_data)} schools")
+
+    # Save data to CSV
+    if all_schools_data:
+        os.makedirs(output_dir, exist_ok=True)
+        with open(full_path, "w", newline="", encoding="utf-8") as csvfile:
+            writer = csv.DictWriter(csvfile, fieldnames=fields)
+            writer.writeheader()
+            writer.writerows(all_schools_data)
+        print(f"Saved data to: {full_path}")
+        print("Data collection completed successfully")
+    else:
+        print("Data collection failed: No data collected")
+
 
 
 def scrape_college_earnings():
+    """
+    Scrapes median earnings data for college graduates from a specified webpage and saves it to a CSV file.
+
+    This function retrieves data from the College Transitions dataverse webpage, extracts a table containing
+    institution names and median earnings 6 years post-entry, cleans the earnings data by removing currency
+    symbols and converting to numeric format, and saves the results to a CSV file.
+    """
     URL = "https://www.collegetransitions.com/dataverse/graduate-earnings/?utm_source=chatgpt.com"
     TARGET_COLUMN_INSTITUTION = "Institution"
     TARGET_COLUMN_EARNINGS = "Median Earnings - 6 Years Post-Entry (Scorecard)"
@@ -281,4 +310,83 @@ def scrape_college_earnings():
     except Exception as e:
         print(f" Error: {e}")
 
-scrape_college_earnings()
+
+
+def ranking_state():
+    """Scrape top 50 school rankings from US News API and save to CSV"""
+    fields = [
+        "institution.displayName",
+        "institution.state",
+        "ranking.displayRank",
+        "ranking.sortRank",
+        "ranking.isTied"
+    ]
+
+    headers = {
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
+    }
+
+    base_url = "https://www.usnews.com/best-colleges/api/search?_sort=ranking.sortRank&_sortDirection=asc&_page="
+    output_dir = "artifacts"
+    output_file = "usnews_top50.csv"
+    full_path = os.path.join(output_dir, output_file)
+    max_schools = 50
+    page = 1
+    all_schools_data = []
+
+    print("Starting US News data collection...")
+
+    # Helper function to traverse nested dictionary
+    def traverse(root, path):
+        value = root
+        for segment in path.split("."):
+            if segment.isdigit():
+                value = value[int(segment)] if len(value) > int(segment) else None
+            else:
+                value = value.get(segment, None)
+        return value
+
+    # Fetch data
+    while len(all_schools_data) < max_schools:
+        url = f"{base_url}{page}"
+        print(f"Fetching page {page}...")
+
+        try:
+            resp = requests.get(url, headers=headers, timeout=10)
+            print(f"Response status: {resp.status_code}")
+
+            if resp.status_code != 200:
+                break
+
+            json_data = resp.json()
+            items = json_data.get("data", {}).get("items", [])
+            print(f"Found {len(items)} schools on page {page}")
+
+            if not items:
+                break
+
+            for school in items:
+                if len(all_schools_data) >= max_schools:
+                    break
+                row = {field: traverse(school, field) for field in fields}
+                all_schools_data.append(row)
+
+            page += 1
+
+        except Exception as e:
+            print(f"Error: {e}")
+            break
+
+    print(f"Collected {len(all_schools_data)} schools")
+
+    # Save data to CSV
+    if all_schools_data:
+        os.makedirs(output_dir, exist_ok=True)
+        with open(full_path, "w", newline="", encoding="utf-8") as csvfile:
+            writer = csv.DictWriter(csvfile, fieldnames=fields)
+            writer.writeheader()
+            writer.writerows(all_schools_data)
+        print(f"Saved data to: {full_path}")
+        print("Step 1 completed successfully")
+    else:
+        print("Step 1 failed: No data collected")

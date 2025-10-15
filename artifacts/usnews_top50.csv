@@ -1,0 +1,51 @@
+institution.displayName,institution.state,ranking.displayRank,ranking.sortRank,ranking.isTied
+Princeton University,NJ,#1,1,False
+Massachusetts Institute of Technology,MA,#2,2,False
+Harvard University,MA,#3,3,False
+Stanford University,CA,#4,4,True
+Yale University,CT,#4,4,True
+University of Chicago,IL,#6,6,False
+Duke University,NC,#7,7,True
+Johns Hopkins University,MD,#7,7,True
+Northwestern University,IL,#7,7,True
+University of Pennsylvania,PA,#7,7,True
+California Institute of Technology,CA,#11,11,False
+Cornell University,NY,#12,12,False
+Brown University,RI,#13,13,True
+Dartmouth College,NH,#13,13,True
+Columbia University,NY,#15,15,True
+"University of California, Berkeley",CA,#15,15,True
+Rice University,TX,#17,17,True
+"University of California, Los Angeles",CA,#17,17,True
+Vanderbilt University,TN,#17,17,True
+Carnegie Mellon University,PA,#20,20,True
+University of Michigan--Ann Arbor,MI,#20,20,True
+University of Notre Dame,IN,#20,20,True
+Washington University in St. Louis,MO,#20,20,True
+Emory University,GA,#24,24,True
+Georgetown University,DC,#24,24,True
+University of North Carolina--Chapel Hill,NC,#26,26,True
+University of Virginia,VA,#26,26,True
+University of Southern California,CA,#28,28,False
+University of California San Diego,CA,#29,29,False
+University of Florida,FL,#30,30,True
+The University of Texas--Austin,TX,#30,30,True
+Georgia Institute of Technology,GA,#32,32,True
+New York University,NY,#32,32,True
+"University of California, Davis",CA,#32,32,True
+"University of California, Irvine",CA,#32,32,True
+Boston College,MA,#36,36,True
+Tufts University,MA,#36,36,True
+University of Illinois Urbana-Champaign,IL,#36,36,True
+University of Wisconsin--Madison,WI,#36,36,True
+"University of California, Santa Barbara",CA,#40,40,False
+The Ohio State University,OH,#41,41,False
+Boston University,MA,#42,42,True
+Rutgers University--New Brunswick,NJ,#42,42,True
+"University of Maryland, College Park",MD,#42,42,True
+University of Washington,WA,#42,42,True
+Lehigh University,PA,#46,46,True
+Northeastern University,MA,#46,46,True
+Purdue University--Main Campus,IN,#46,46,True
+University of Georgia,GA,#46,46,True
+University of Rochester,NY,#46,46,True
