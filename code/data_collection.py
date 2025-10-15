@@ -18,7 +18,7 @@ def scrape_puh_rankings(
     str: The path of the saved CSV.
 
     Data in the CSV:
-    University: The name of the university.
+    University: The name of the university, with top 50 official names.
     rk[year]: The ranking of the university in US. News Best National Universities Rankings of that [year].
     avgrk: The average ranking of the university in US. News Best National Universities Rankings through 2018 to 2025.
 
@@ -81,8 +81,63 @@ def scrape_puh_rankings(
         col9_text = td9.get_text(strip=True) if td9 else "N/A"
         col10_text = td10.get_text(strip=True) if td10 else "N/A"
 
+        # Mapping university names to full official names
+        name_mapping = {
+            "Princeton": "Princeton University",
+            "MIT": "Massachusetts Institute of Technology",
+            "Harvard": "Harvard University",
+            "Stanford": "Stanford University",
+            "Yale": "Yale University",
+            "Caltech": "California Institute of Technology",
+            "Duke": "Duke University",
+            "Johns Hopkins": "Johns Hopkins University",
+            "Northwestern": "Northwestern University",
+            "Penn": "University of Pennsylvania",
+            "Chicago": "University of Chicago",
+            "Cornell": "Cornell University",
+            "Brown": "Brown University",
+            "Columbia": "Columbia University",
+            "UCLA": "University of California, Los Angeles",
+            "Dartmouth": "Dartmouth College",
+            "UC Berkeley": "University of California, Berkeley",
+            "Rice": "Rice University",
+            "Vanderbilt": "Vanderbilt University",
+            "Notre Dame": "University of Notre Dame",
+            "Michigan": "University of Michigan--Ann Arbor",
+            "Washington Univ": "Washington University in St. Louis",
+            "Carnegie Mellon": "Carnegie Mellon University",
+            "Georgetown": "Georgetown University",
+            "Emory": "Emory University",
+            "Virginia": "University of Virginia",
+            "North Carolina": "University of North Carolina--Chapel Hill",
+            "USC": "University of Southern California",
+            "UC San Diego": "University of California, San Diego",
+            "Florida": "University of Florida",
+            "UT Austin": "The University of Texas--Austin",
+            "NYU": "New York University",
+            "UC Davis": "University of California, Davis",
+            "UC Irvine": "University of California, Irvine",
+            "Georgia Tech": "Georgia Institute of Technology",
+            "Illinois": "University of Illinois Urbana-Champaign",
+            "Boston College": "Boston College",
+            "Tufts": "Tufts University",
+            "UC Santa Barbara": "University of California, Santa Barbara",
+            "UW Madison": "University of Wisconsin--Madison",
+            "Rutgers": "Rutgers University--New Brunswick",
+            "Boston Univ": "Boston University",
+            "Ohio St": "The Ohio State University",
+            "Maryland": "University of Maryland, College Park",
+            "Rochester": "University of Rochester",
+            "Washington": "University of Washington",
+            "Purdue": "Purdue University--Main Campus",
+            "Georgia": "University of Georgia",
+            "Lehigh": "Lehigh University",
+            "Northeastern": "Northeastern University"
+        }
+        university_name = name_mapping.get(col1_text, col1_text)
+
         data.append({
-            "University": col1_text,
+            "University": university_name,
             "rk2018": col2_text,
             "rk2019": col3_text,
             "rk2020": col4_text,

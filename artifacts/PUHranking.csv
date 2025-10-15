@@ -1,59 +1,59 @@
 University,rk2018,rk2019,rk2020,rk2021,rk2022,rk2023,rk2024,rk2025,avgrk
-Princeton,1,1,1,1,1,1,1,1,1
-MIT,5,3,3,4,2,2,2,2,2.875
-Harvard,2,2,2,2,2,3,3,3,2.375
-Stanford,5,7,6,6,6,3,3,4,5
-Yale,3,3,3,4,5,3,5,5,3.875
-Caltech,10,12,12,9,9,9,7,6,9.25
-Duke,9,8,10,12,9,10,7,6,8.875
-Johns Hopkins,11,10,10,9,9,7,9,6,8.875
-Northwestern,11,10,9,9,9,10,9,6,9.125
-Penn,8,8,6,8,8,7,6,10,7.625
-Chicago,3,3,6,6,6,6,12,11,6.625
-Cornell,14,16,17,18,17,17,12,11,15.25
-Brown,14,14,14,14,14,13,9,13,13.125
-Columbia,5,3,3,3,2,18,12,13,7.375
-UCLA,21,19,20,20,20,20,15,15,18.75
-Dartmouth,11,12,12,13,13,12,18,15,13.25
-UC Berkeley,21,22,22,22,21,20,15,17,20
-Rice,14,16,17,16,17,15,17,18,16.25
-Vanderbilt,14,14,17,14,14,13,18,18,15.25
-Notre Dame,18,18,15,19,19,18,20,18,18.125
-Michigan,28,27,25,24,23,25,21,21,24.25
-Washington Univ,18,19,19,16,14,15,24,21,18.25
-Carnegie Mellon,25,25,25,26,25,22,24,21,24.125
-Georgetown,20,22,24,23,23,22,22,24,22.5
-Emory,21,22,21,21,20,22,24,24,21.875
-Virginia,25,25,28,26,25,25,24,24,25.25
-North Carolina,30,30,29,28,28,29,22,27,27.875
-USC,21,22,22,24,27,25,28,27,24.5
-UC San Diego,42,41,37,35,34,34,28,29,35
-Florida,42,35,34,30,28,29,28,30,32
-UT Austin,56,49,48,42,38,38,32,30,41.625
-NYU,30,30,29,30,28,25,35,30,29.625
-UC Davis,46,38,39,39,38,38,28,33,37.375
-UC Irvine,42,33,36,35,36,34,33,33,35.25
-Georgia Tech,34,35,29,35,38,44,33,33,35.125
-Illinois,52,46,48,47,47,41,35,33,43.625
+Princeton University,1,1,1,1,1,1,1,1,1
+Massachusetts Institute of Technology,5,3,3,4,2,2,2,2,2.875
+Harvard University,2,2,2,2,2,3,3,3,2.375
+Stanford University,5,7,6,6,6,3,3,4,5
+Yale University,3,3,3,4,5,3,5,5,3.875
+California Institute of Technology,10,12,12,9,9,9,7,6,9.25
+Duke University,9,8,10,12,9,10,7,6,8.875
+Johns Hopkins University,11,10,10,9,9,7,9,6,8.875
+Northwestern University,11,10,9,9,9,10,9,6,9.125
+University of Pennsylvania,8,8,6,8,8,7,6,10,7.625
+University of Chicago,3,3,6,6,6,6,12,11,6.625
+Cornell University,14,16,17,18,17,17,12,11,15.25
+Brown University,14,14,14,14,14,13,9,13,13.125
+Columbia University,5,3,3,3,2,18,12,13,7.375
+"University of California, Los Angeles",21,19,20,20,20,20,15,15,18.75
+Dartmouth College,11,12,12,13,13,12,18,15,13.25
+"University of California, Berkeley",21,22,22,22,21,20,15,17,20
+Rice University,14,16,17,16,17,15,17,18,16.25
+Vanderbilt University,14,14,17,14,14,13,18,18,15.25
+University of Notre Dame,18,18,15,19,19,18,20,18,18.125
+University of Michigan--Ann Arbor,28,27,25,24,23,25,21,21,24.25
+Washington University in St. Louis,18,19,19,16,14,15,24,21,18.25
+Carnegie Mellon University,25,25,25,26,25,22,24,21,24.125
+Georgetown University,20,22,24,23,23,22,22,24,22.5
+Emory University,21,22,21,21,20,22,24,24,21.875
+University of Virginia,25,25,28,26,25,25,24,24,25.25
+University of North Carolina--Chapel Hill,30,30,29,28,28,29,22,27,27.875
+University of Southern California,21,22,22,24,27,25,28,27,24.5
+"University of California, San Diego",42,41,37,35,34,34,28,29,35
+University of Florida,42,35,34,30,28,29,28,30,32
+The University of Texas--Austin,56,49,48,42,38,38,32,30,41.625
+New York University,30,30,29,30,28,25,35,30,29.625
+"University of California, Davis",46,38,39,39,38,38,28,33,37.375
+"University of California, Irvine",42,33,36,35,36,34,33,33,35.25
+Georgia Institute of Technology,34,35,29,35,38,44,33,33,35.125
+University of Illinois Urbana-Champaign,52,46,48,47,47,41,35,33,43.625
 Boston College,32,38,37,35,36,36,39,37,36.25
-Tufts,29,27,29,30,28,32,40,37,31.5
-UC Santa Barbara,37,30,34,30,28,32,35,39,33.125
-UW Madison,46,49,46,42,42,38,35,39,42.125
-Rutgers,69,56,62,63,63,55,40,41,56.125
-Boston Univ,37,42,40,42,42,41,43,41,41
-Ohio St,54,56,54,53,49,49,43,41,49.875
-Maryland,61,63,64,58,59,55,43,44,55.875
-Rochester,34,33,29,34,34,36,47,44,36.375
-Washington,56,59,62,58,59,55,40,46,54.375
-Purdue,56,56,57,53,49,51,43,46,51.375
+Tufts University,29,27,29,30,28,32,40,37,31.5
+"University of California, Santa Barbara",37,30,34,30,28,32,35,39,33.125
+University of Wisconsin--Madison,46,49,46,42,42,38,35,39,42.125
+Rutgers University--New Brunswick,69,56,62,63,63,55,40,41,56.125
+Boston University,37,42,40,42,42,41,43,41,41
+The Ohio State University,54,56,54,53,49,49,43,41,49.875
+"University of Maryland, College Park",61,63,64,58,59,55,43,44,55.875
+University of Rochester,34,33,29,34,34,36,47,44,36.375
+University of Washington,56,59,62,58,59,55,40,46,54.375
+Purdue University--Main Campus,56,56,57,53,49,51,43,46,51.375
 Wake Forest,27,27,27,28,28,29,47,46,32.375
-Georgia,54,46,50,47,48,49,47,46,48.375
-Lehigh,46,53,50,49,49,51,47,46,48.875
+University of Georgia,54,46,50,47,48,49,47,46,48.375
+Lehigh University,46,53,50,49,49,51,47,46,48.875
 Virginia Tech,69,76,74,74,75,62,47,51,66
 Texas A&M,69,66,70,66,68,67,47,51,63
 Case Western,37,42,40,42,42,44,53,51,43.875
 William & Mary,32,38,40,39,38,41,53,54,41.875
-Northeastern,40,44,40,49,49,44,53,54,46.625
+Northeastern University,40,44,40,49,49,44,53,54,46.625
 Florida St,81,70,57,58,55,55,53,54,60.375
 Minnesota,69,76,70,66,68,62,53,54,64.75
 Stony Brook,97,80,91,88,93,77,58,58,80.25
