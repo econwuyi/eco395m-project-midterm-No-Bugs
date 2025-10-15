@@ -158,3 +158,58 @@ def scrape_puh_rankings(
     print(f"\nScraped {len(data)} rows. Data saved to '{output_file}'.")
 
     return output_file
+
+
+
+def scrape_usnews_sat_tuition(
+        
+url="https://www.usnews.com/best-colleges/rankings/national-universities",
+        output_file="artifacts/sat_tuition.csv"):
+    """
+    Scrapes tuition fees and SAT score ranges for the Top 50 U.S. News 
+2026
+    Best National Universities and saves them to a CSV file.
+
+    Args:
+        url (str): The targeted U.S. News URL.
+        output_file (str): The path to save the output CSV.
+
+    Returns:
+        str: Path of the saved CSV.
+    """
+    import requests
+    from bs4 import BeautifulSoup
+    import pandas as pd
+
+    headers = {"User-Agent": "Mozilla/5.0"}
+    response = requests.get(url, headers=headers)
+    response.raise_for_status()
+
+    soup = BeautifulSoup(response.content, "html.parser")
+    universities = []
+    cards = soup.select("div.Block-flzCty")
+
+    for i, block in enumerate(cards[:50]):  # limit to top 50
+        name_el = block.select_one("h3.Heading-sc-1w5vxap-0")
+        rank_el = block.select_one("span.RankList_rank__G2aWY")
+        tuition_el = block.find(string=lambda t: "Tuition" in t or "")
+        sat_el = block.find(string=lambda t: "SAT" in t or "")
+
+        name = name_el.get_text(strip=True) if name_el else "N/A"
+        rank = rank_el.get_text(strip=True) if rank_el else "N/A"
+        tuition = tuition_el.strip() if tuition_el else "N/A"
+        sat = sat_el.strip() if sat_el else "N/A"
+
+        universities.append({
+            "University": name,
+            "Rank": rank,
+            "Tuition": tuition,
+            "SAT_Range": sat
+        })
+
+    df = pd.DataFrame(universities)
+    df.to_csv(output_file, index=False, encoding="utf-8")
+    print(f"Scraped {len(df)} universities. Data saved to 
+'{output_file}'.")
+    return output_file
+
