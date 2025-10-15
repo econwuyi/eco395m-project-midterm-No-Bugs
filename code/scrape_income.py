@@ -1,12 +1,12 @@
 import pandas as pd
 import requests
 
-URL = "https://www.collegetransitions.com/dataverse/graduate-earnings/?utm_source=chatgpt.com"
-TARGET_COLUMN_INSTITUTION = 'Institution'
-TARGET_COLUMN_EARNINGS = 'Median Earnings - 6 Years Post-Entry (Scorecard)'
-OUTPUT_FILENAME = 'graduate_earnings_data.csv'
-
 def scrape_college_earnings(url, institution_col, earnings_col, output_file):
+    url = "https://www.collegetransitions.com/dataverse/graduate-earnings/?utm_source=chatgpt.com"
+    target_column_institution = 'Institution'
+    target_column_earnings = 'Median Earnings - 6 Years Post-Entry (Scorecard)'
+    output_filename = 'graduate_earnings_data.csv'
+
     print("Fetching web content...")
     
     headers = {
