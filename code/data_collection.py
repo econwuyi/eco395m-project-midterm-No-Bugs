@@ -2,7 +2,7 @@ import requests
 from bs4 import BeautifulSoup
 import re
 import csv
-
+import pandas as pd
 
 def scrape_puh_rankings(
         url="https://publicuniversityhonors.com/us-news-rankings-2025-which-universities-have-gained-or-lost-the-most-since-2018/",
@@ -209,13 +209,8 @@ url="https://www.usnews.com/best-colleges/rankings/national-universities",
 
     df = pd.DataFrame(universities)
     df.to_csv(output_file, index=False, encoding="utf-8")
-    print(f"Scraped {len(df)} universities. Data saved to 
-'{output_file}'.")
+    print(f"Scraped {len(df)} universities. Data saved to '{output_file}'.")
     return output_file
-
-
-import pandas as pd
-import requests
 
 
 def scrape_college_earnings():
@@ -280,5 +275,3 @@ def scrape_college_earnings():
 
     except Exception as e:
         print(f" Error: {e}")
-
-scrape_college_earnings()
