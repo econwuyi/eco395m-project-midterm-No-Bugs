@@ -1,11 +1,11 @@
-from code.data_collection import (
+from data_collection import (
     scrape_puh_rankings,
     collect_sat_tuition,
     scrape_college_earnings,
     ranking_state
 )
 
-from code.data_cleaning import process_university_data
+from data_cleaning import process_university_data
 
 
 def main():
@@ -23,12 +23,14 @@ def main():
     print("\nStep 4: Collecting State-level Rankings...")
     ranking_state()
 
+    print("\nData collection completed for all modules.\n")
+
     print("\nStep 5: Processing, cleaning, and merging data...")
     process_university_data()
 
     print("\nData cleaning and processing completed successfully.\n")
 
-    print("\nData collection completed for all modules.\n")
+
 
 if __name__ == "__main__":
     main()
