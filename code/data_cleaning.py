@@ -1,20 +1,23 @@
 import pandas as pd
-import os
 from pathlib import Path
 
-def clean_and_merge_data():
+
+def process_university_data(base_path="artifacts"):
     """
-    Main data cleaning function.
-    Reads multiple CSV files from artifacts folder, cleans them, and merges into a final dataset.
-    
+    Process university data by cleaning, merging, analyzing, and saving the final dataset.
+
+    Args:
+        base_path (str): Relative path to the directory containing input CSV files
+                         and where the output will be saved (default: 'artifacts')
+
     Returns:
-    pd.DataFrame: Cleaned and merged final dataset
+        pd.DataFrame: Cleaned and merged final dataset, or None if an error occurs
     """
-    print("Starting data cleaning and merging process...")
-    
-    # Define data paths (using relative paths)
-    base_path = Path(__file__).parent.parent / "artifacts"
-    
+    print("Starting university data processing...")
+
+    # Define data paths using relative path from project root
+    base_path = Path(__file__).parent.parent / base_path
+
     # Read all data files
     try:
         usnews_df = pd.read_csv(base_path / "usnews_top50.csv")
@@ -28,117 +31,49 @@ def clean_and_merge_data():
 
     # Clean each dataset
     print("Starting data cleaning...")
-    usnews_clean = _clean_usnews_data(usnews_df)
-    tuition_sat_clean = _clean_tuition_sat_data(tuition_sat_df)
-    earnings_clean = _clean_earnings_data(earnings_df)
-    puh_clean = _clean_puh_data(puh_df)
-    
-    # Merge data step by step
-    print("Starting data merging...")
-    
-    # Step 1: Merge ranking data with tuition & SAT data (based on school name)
-    merged_df = usnews_clean.merge(tuition_sat_clean, on='school_name', how='left')
-    print(f"After first merge: {len(merged_df)} schools")
-    
-    # Step 2: Merge with earnings data
-    merged_df = merged_df.merge(earnings_clean, on='school_name', how='left')
-    print(f"After second merge: {len(merged_df)} schools")
-    
-    # Step 3: Merge with historical ranking data
-    merged_df = merged_df.merge(puh_clean, on='school_name', how='left')
-    print(f"Final merged dataset: {len(merged_df)} schools")
-    
-    # Display basic information about merged results
-    print("\nColumns in merged data:", merged_df.columns.tolist())
-    print("Data shape:", merged_df.shape)
-    
-    # Save cleaned and merged data to artifacts folder
-    output_path = base_path / "cleaned_merged_dataset.csv"
-    merged_df.to_csv(output_path, index=False)
-    print(f"\nCleaned data saved to: {output_path}")
-    
-    return merged_df
 
-def _clean_usnews_data(df):
-    """
-    Clean US News ranking data.
-    """
-    cleaned_df = df.copy()
-    
-    # Rename columns based on actual data structure
-    cleaned_df = cleaned_df.rename(columns={
+    # Clean US News data
+    usnews_clean = usnews_df.copy()
+    usnews_clean = usnews_clean.rename(columns={
         'institution.displayName': 'school_name',
-        'institution.state': 'state', 
+        'institution.state': 'state',
         'ranking.displayRank': 'display_rank',
         'ranking.sortRank': 'sort_rank',
         'ranking.isTied': 'is_tied'
     })
-    
-    # Clean school names: remove leading/trailing whitespace
-    cleaned_df['school_name'] = cleaned_df['school_name'].str.strip()
-    
-    # Process ranking columns: remove '#' symbol and convert to numeric
-    cleaned_df['display_rank'] = cleaned_df['display_rank'].str.replace('#', '').astype(int)
-    cleaned_df['sort_rank'] = pd.to_numeric(cleaned_df['sort_rank'], errors='coerce')
-    
-    print(f"US News data cleaned: {len(cleaned_df)} schools")
-    return cleaned_df
+    usnews_clean['school_name'] = usnews_clean['school_name'].str.strip()
+    usnews_clean['display_rank'] = usnews_clean['display_rank'].str.replace('#', '').astype(int)
+    usnews_clean['sort_rank'] = pd.to_numeric(usnews_clean['sort_rank'], errors='coerce')
+    print(f"US News data cleaned: {len(usnews_clean)} schools")
 
-def _clean_tuition_sat_data(df):
-    """
-    Clean tuition and SAT data.
-    """
-    cleaned_df = df.copy()
-    
-    # Rename columns based on actual data structure
-    cleaned_df = cleaned_df.rename(columns={
+    # Clean tuition and SAT data
+    tuition_sat_clean = tuition_sat_df.copy()
+    tuition_sat_clean = tuition_sat_clean.rename(columns={
         'institution.displayName': 'school_name',
         'searchData.tuition.rawValue': 'tuition',
         'searchData.satAvg.rawValue': 'sat_score'
     })
-    
-    # Clean school names
-    cleaned_df['school_name'] = cleaned_df['school_name'].str.strip()
-    
-    # Ensure tuition and SAT scores are numeric
-    cleaned_df['tuition'] = pd.to_numeric(cleaned_df['tuition'], errors='coerce')
-    cleaned_df['sat_score'] = pd.to_numeric(cleaned_df['sat_score'], errors='coerce')
-    
-    print(f"Tuition & SAT data cleaned: {len(cleaned_df)} schools")
-    return cleaned_df
+    tuition_sat_clean['school_name'] = tuition_sat_clean['school_name'].str.strip()
+    tuition_sat_clean['tuition'] = pd.to_numeric(tuition_sat_clean['tuition'], errors='coerce')
+    tuition_sat_clean['sat_score'] = pd.to_numeric(tuition_sat_clean['sat_score'], errors='coerce')
+    print(f"Tuition & SAT data cleaned: {len(tuition_sat_clean)} schools")
 
-def _clean_earnings_data(df):
-    """
-    Clean graduate earnings data.
-    """
-    cleaned_df = df.copy()
-    
-    # Rename columns
-    cleaned_df = cleaned_df.rename(columns={
+    # Clean earnings data
+    earnings_clean = earnings_df.copy()
+    earnings_clean = earnings_clean.rename(columns={
         'Institution': 'school_name',
         'Median Earnings - 6 Years Post-Entry (Scorecard)': 'median_earnings'
     })
-    
-    # Clean school names
-    cleaned_df['school_name'] = cleaned_df['school_name'].str.strip()
-    
-    # Ensure earnings are numeric
-    cleaned_df['median_earnings'] = pd.to_numeric(cleaned_df['median_earnings'], errors='coerce')
-    
-    print(f"Earnings data cleaned: {len(cleaned_df)} schools")
-    return cleaned_df
+    earnings_clean['school_name'] = earnings_clean['school_name'].str.strip()
+    earnings_clean['median_earnings'] = pd.to_numeric(earnings_clean['median_earnings'], errors='coerce')
+    print(f"Earnings data cleaned: {len(earnings_clean)} schools")
 
-def _clean_puh_data(df):
-    """
-    Clean historical ranking data.
-    """
-    cleaned_df = df.copy()
-    
-    # Rename columns based on actual data structure
-    cleaned_df = cleaned_df.rename(columns={
+    # Clean historical ranking data
+    puh_clean = puh_df.copy()
+    puh_clean = puh_clean.rename(columns={
         'University': 'school_name',
         'rk2018': 'ht2018',
-        'rk2019': 'ht2019', 
+        'rk2019': 'ht2019',
         'rk2020': 'ht2020',
         'rk2021': 'ht2021',
         'rk2022': 'ht2022',
@@ -147,60 +82,59 @@ def _clean_puh_data(df):
         'rk2025': 'ht2025',
         'avgrk': 'avgtk'
     })
-    
-    # Clean school names
-    cleaned_df['school_name'] = cleaned_df['school_name'].str.strip()
-    
-    # Ensure all ranking columns are numeric
+    puh_clean['school_name'] = puh_clean['school_name'].str.strip()
     rank_columns = ['ht2018', 'ht2019', 'ht2020', 'ht2021', 'ht2022', 'ht2023', 'ht2024', 'ht2025', 'avgtk']
     for col in rank_columns:
-        if col in cleaned_df.columns:
-            cleaned_df[col] = pd.to_numeric(cleaned_df[col], errors='coerce')
-    
-    print(f"Historical ranking data cleaned: {len(cleaned_df)} schools")
-    return cleaned_df
+        if col in puh_clean.columns:
+            puh_clean[col] = pd.to_numeric(puh_clean[col], errors='coerce')
+    print(f"Historical ranking data cleaned: {len(puh_clean)} schools")
 
-# If this file is run directly, execute the cleaning function
-if __name__ == "__main__":
-    final_data = clean_and_merge_data()
-    if final_data is not None:
-        print("\nData cleaning and merging completed!")
-        print("First 5 schools in the dataset:")
-        print(final_data[['school_name', 'display_rank', 'tuition', 'sat_score', 'median_earnings']].head())
-        
-        # Check for missing SAT scores
-        missing_sat = final_data['sat_score'].isna().sum()
-        print(f"\nNumber of schools with missing SAT scores: {missing_sat}")
-        if missing_sat > 0:
-            print("Schools with missing SAT scores:")
-            missing_schools = final_data[final_data['sat_score'].isna()][['school_name', 'display_rank']]
-            print(missing_schools)
-            
-        # Check for missing earnings data
-        missing_earnings = final_data['median_earnings'].isna().sum()
-        print(f"\nNumber of schools with missing earnings data: {missing_earnings}")
-        
-        # ========== Add tied rankings check ==========
-        print("\n=== CHECKING TIED RANKINGS ===")
-        
-        # Find schools with tied rankings
-        tied_schools = final_data[final_data['is_tied'] == True]
-        print(f"Number of schools with tied rankings: {len(tied_schools)}")
-        
-        # Group by display_rank to identify tied ranking groups
-        rank_groups = final_data.groupby('display_rank').size()
-        tied_ranks = rank_groups[rank_groups > 1]
-        
-        print("\nTied ranking groups:")
-        for rank, count in tied_ranks.items():
-            schools = final_data[final_data['display_rank'] == rank]['school_name'].tolist()
-            print(f"Rank #{rank}: {count} schools - {', '.join(schools)}")
-        
-        # Compare display_rank vs sort_rank differences
-        print("\nRanking comparison (first 15 schools):")
-        comparison = final_data[['school_name', 'display_rank', 'sort_rank', 'is_tied']].head(15)
-        print(comparison)
-        # ========== End tied rankings check ==========
-        
-    else:
-        print("Data cleaning failed!")
+    # Merge data step by step
+    print("Starting data merging...")
+    merged_df = usnews_clean.merge(tuition_sat_clean, on='school_name', how='left')
+    print(f"After first merge: {len(merged_df)} schools")
+    merged_df = merged_df.merge(earnings_clean, on='school_name', how='left')
+    print(f"After second merge: {len(merged_df)} schools")
+    merged_df = merged_df.merge(puh_clean, on='school_name', how='left')
+    print(f"Final merged dataset: {len(merged_df)} schools")
+
+    # Display basic information about merged results
+    print("\nColumns in merged data:", merged_df.columns.tolist())
+    print("Data shape:", merged_df.shape)
+
+    # Save cleaned and merged data
+    output_path = base_path / "cleaned_merged_dataset.csv"
+    merged_df.to_csv(output_path, index=False)
+    print(f"\nCleaned data saved to: {output_path}")
+
+    # Analyze the data
+    print("\nData analysis:")
+    print("First 5 schools in the dataset:")
+    print(merged_df[['school_name', 'display_rank', 'tuition', 'sat_score', 'median_earnings']].head())
+
+    # Check for missing SAT scores
+    missing_sat = merged_df['sat_score'].isna().sum()
+    print(f"\nNumber of schools with missing SAT scores: {missing_sat}")
+    if missing_sat > 0:
+        print("Schools with missing SAT scores:")
+        print(merged_df[merged_df['sat_score'].isna()][['school_name', 'display_rank']])
+
+    # Check for missing earnings data
+    missing_earnings = merged_df['median_earnings'].isna().sum()
+    print(f"\nNumber of schools with missing earnings data: {missing_earnings}")
+
+    # Check tied rankings
+    print("\n=== CHECKING TIED RANKINGS ===")
+    tied_schools = merged_df[merged_df['is_tied'] == True]
+    print(f"Number of schools with tied rankings: {len(tied_schools)}")
+    rank_groups = merged_df.groupby('display_rank').size()
+    tied_ranks = rank_groups[rank_groups > 1]
+    print("\nTied ranking groups:")
+    for rank, count in tied_ranks.items():
+        schools = merged_df[merged_df['display_rank'] == rank]['school_name'].tolist()
+        print(f"Rank #{rank}: {count} schools - {', '.join(schools)}")
+    print("\nRanking comparison (first 15 schools):")
+    print(merged_df[['school_name', 'display_rank', 'sort_rank', 'is_tied']].head(15))
+
+    print("\nUniversity data processing completed!")
+    return merged_df
