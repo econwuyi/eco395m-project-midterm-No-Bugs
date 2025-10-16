@@ -6,14 +6,14 @@ import numpy as np
 import os
 
 
-def run_regressions(data_path='artifacts/cleaned_merged_dataset.csv', output_path='artifacts/regression.csv'):
+def run_regressions(data_path="artifacts/cleaned_merged_dataset.csv", output_path="artifacts/regression.csv"):
     """
     Conduct two OLS regressions of median_earnings on independent variables with state-level clustering and save results to a CSV file.
 
     This function conducts two separate regression using data from a specified CSV file:
-    1. Regresses 'median_earnings' on 'avgrk' (renamed from 'avgtk'), 'tuition', and their interaction,
+    1. Regresses "median_earnings" on "avgrk" (renamed from "avgtk"), "tuition", and their interaction,
        with clustering at the state level.
-    2. Regresses 'median_earnings' on 'sat_score', 'tuition', and their interaction,
+    2. Regresses "median_earnings" on "sat_score", "tuition", and their interaction,
        with clustering at the state level.
 
     The results are combined into a single DataFrame, including coefficients, standard errors,
@@ -22,9 +22,9 @@ def run_regressions(data_path='artifacts/cleaned_merged_dataset.csv', output_pat
 
     Parameters:
         data_path (str, optional): Path to the input CSV file containing the dataset.
-                                  Defaults to 'artifacts/cleaned_merged_dataset.csv'.
+                                  Defaults to "artifacts/cleaned_merged_dataset.csv".
         output_path (str, optional): Path to save the regression results CSV file.
-                                    Defaults to 'artifacts/regression.csv'.
+                                    Defaults to "artifacts/regression.csv".
 
     Returns:
         None: The function saves the regression results to the specified CSV file and
@@ -33,31 +33,31 @@ def run_regressions(data_path='artifacts/cleaned_merged_dataset.csv', output_pat
     df = pd.read_csv(data_path)
 
     # Drop the observations with empty variables
-    df = df.dropna(subset=['median_earnings', 'avgtk', 'sat_score', 'tuition', 'state'])
-    df = df.rename(columns={'avgtk': 'avgrk'})
+    df = df.dropna(subset=["median_earnings", "avgtk", "sat_score", "tuition", "state"])
+    df = df.rename(columns={"avgtk": "avgrk"})
 
     # Regression 1: income on avgrk, tuition and their interactions, cluster on state
-    formula1 = 'median_earnings ~ avgrk + tuition + avgrk:tuition'
+    formula1 = "median_earnings ~ avgrk + tuition + avgrk:tuition"
     model1 = smf.ols(formula1, data=df)
-    results1 = model1.fit(cov_type='cluster', cov_kwds={'groups': df['state']})
+    results1 = model1.fit(cov_type="cluster", cov_kwds={"groups": df["state"]})
 
     # Regression 2: income on sat score, tuition and their interactions, cluster on state
-    formula2 = 'median_earnings ~ sat_score + tuition + sat_score:tuition'
+    formula2 = "median_earnings ~ sat_score + tuition + sat_score:tuition"
     model2 = smf.ols(formula2, data=df)
-    results2 = model2.fit(cov_type='cluster', cov_kwds={'groups': df['state']})
+    results2 = model2.fit(cov_type="cluster", cov_kwds={"groups": df["state"]})
 
     summary1 = results1.summary()
     summary2 = results2.summary()
     summary_table1 = pd.read_html(summary1.tables[1].as_html(), header=0, index_col=0)[0]
     summary_table2 = pd.read_html(summary2.tables[1].as_html(), header=0, index_col=0)[0]
-    summary_table1['Model'] = 'OLS with State Clustering (avgrk)'
-    summary_table1['R-squared'] = results1.rsquared
-    summary_table1['Adj. R-squared'] = results1.rsquared_adj
-    summary_table2['Model'] = 'OLS with State Clustering (sat_score)'
-    summary_table2['R-squared'] = results2.rsquared
-    summary_table2['Adj. R-squared'] = results2.rsquared_adj
-    summary_table1['Model_Type'] = 'avgrk'
-    summary_table2['Model_Type'] = 'sat_score'
+    summary_table1["Model"] = "OLS with State Clustering (avgrk)"
+    summary_table1["R-squared"] = results1.rsquared
+    summary_table1["Adj. R-squared"] = results1.rsquared_adj
+    summary_table2["Model"] = "OLS with State Clustering (sat_score)"
+    summary_table2["R-squared"] = results2.rsquared
+    summary_table2["Adj. R-squared"] = results2.rsquared_adj
+    summary_table1["Model_Type"] = "avgrk"
+    summary_table2["Model_Type"] = "sat_score"
     combined_table = pd.concat([summary_table1, summary_table2], axis=0)
 
     # Save the result to CSV
@@ -66,8 +66,8 @@ def run_regressions(data_path='artifacts/cleaned_merged_dataset.csv', output_pat
 
 def generate_all_plots():
     """
-    Generates four scatter plots comparing university median earnings against school rank, 
-    standardized tuition, SAT scores, and average rank. Uses state-specific markers and colors, 
+    Generates four scatter plots comparing university median earnings against school rank,
+    standardized tuition, SAT scores, and average rank. Uses state-specific markers and colors,
     with non-overlapping labels connected by fine black lines. Axes are oriented negative to positive (left-to-right, bottom-to-top).
 
     Usage:
@@ -75,23 +75,23 @@ def generate_all_plots():
         Or: `from analysis_data import generate_all_plots; generate_all_plots()`
 
     Args:
-        None. Uses default CSV path 'artifacts/cleaned_merged_dataset.csv' with columns 
-         'school_name', 'state', 'sort_rank', 'tuition', 'sat_score', 'median_earnings', 'avgtk'.
+        None. Uses default CSV path "artifacts/cleaned_merged_dataset.csv" with columns
+         "school_name", "state", "sort_rank", "tuition", "sat_score", "median_earnings", "avgtk".
 
     Returns:
-        None. Saves four PNG files in 'plot' directory.
+        None. Saves four PNG files in "plot" directory.
 
     Requirements:
         Install: `pip install pandas matplotlib seaborn numpy`
         CSV file must be at specified path.
 
     Notes:
-        Update `csv_path` in `generate_all_plots` if needed (e.g., 'C:/Users/YourUsername/Downloads/cleaned_merged_dataset.csv').
+        Update `csv_path` in `generate_all_plots` if needed (e.g., "C:/Users/YourUsername/Downloads/cleaned_merged_dataset.csv").
         Adjust `txt_height`/`txt_width` in `plot_scatter` if labels overlap.
     """
     # Default CSV path and create plot directory
-    csv_path = 'artifacts/cleaned_merged_dataset.csv'
-    os.makedirs('plot', exist_ok=True)
+    csv_path = "artifacts/cleaned_merged_dataset.csv"
+    os.makedirs("plot", exist_ok=True)
 
     # Read the CSV file
     df = pd.read_csv(csv_path)
@@ -151,11 +151,11 @@ def generate_all_plots():
     }
 
     # Apply abbreviation mapping
-    df['school_name'] = df['school_name'].map(school_abbr).fillna(df['school_name'])
+    df["school_name"] = df["school_name"].map(school_abbr).fillna(df["school_name"])
 
     # Define state styles
-    states = df['state'].unique()
-    markers = ['o', 's', '^', 'D', 'v', 'p', '*', 'h', 'x', '+', '>', '<', 'd', 'P', 'H', 'X']
+    states = df["state"].unique()
+    markers = ["o", "s", "^", "D", "v", "p", "*", "h", "x", "+", ">", "<", "d", "P", "H", "X"]
     colors = sns.color_palette("husl", len(states))
     state_style = {state: (markers[i % len(markers)], colors[i % len(colors)]) for i, state in enumerate(states)}
 
@@ -169,8 +169,8 @@ def generate_all_plots():
         standardized = 2 * (series - min_val) / range_val - 1
         return standardized
 
-    df['tuition_std'] = standardize_to_range(df['tuition'])
-    df['sat_score_std'] = standardize_to_range(df['sat_score'])
+    df["tuition_std"] = standardize_to_range(df["tuition"])
+    df["sat_score_std"] = standardize_to_range(df["sat_score"])
 
     # Internal function to get text positions
     def get_text_positions(x_data, y_data, txt_width, txt_height):
@@ -195,37 +195,37 @@ def generate_all_plots():
     # Internal function to plot text
     def text_plotter(ax, x_data, y_data, text_positions, texts, txt_width, txt_height):
         for x, y, t, text_label in zip(x_data, y_data, text_positions, texts):
-            ax.annotate(text_label, (x, t), fontsize=11, ha='center', va='bottom', color='black',
-                        bbox=dict(facecolor='white', alpha=0.8, edgecolor='none'))
+            ax.annotate(text_label, (x, t), fontsize=11, ha="center", va="bottom", color="black",
+                        bbox=dict(facecolor="white", alpha=0.8, edgecolor="none"))
             if y != t:
-                ax.plot([x, x], [y, t], color='black', alpha=0.3, linewidth=0.5, zorder=0)
+                ax.plot([x, x], [y, t], color="black", alpha=0.3, linewidth=0.5, zorder=0)
 
     # Internal function to plot scatter
     def plot_scatter(df, state_style, x_col, x_label, title, x_median):
         plt.figure(figsize=(14, 10))
         for state, (marker, color) in state_style.items():
-            state_data = df[df['state'] == state]
-            plt.scatter(state_data[x_col], state_data['median_earnings'],
+            state_data = df[df["state"] == state]
+            plt.scatter(state_data[x_col], state_data["median_earnings"],
                         marker=marker, color=color, label=state, alpha=0.7, s=100)
 
         ax = plt.gca()
-        ax.spines['left'].set_position(('data', x_median))
-        ax.spines['bottom'].set_position(('data', df['median_earnings'].median()))
-        ax.spines['right'].set_color('none')
-        ax.spines['top'].set_color('none')
-        ax.xaxis.set_ticks_position('bottom')
-        ax.yaxis.set_ticks_position('left')
+        ax.spines["left"].set_position(("data", x_median))
+        ax.spines["bottom"].set_position(("data", df["median_earnings"].median()))
+        ax.spines["right"].set_color("none")
+        ax.spines["top"].set_color("none")
+        ax.xaxis.set_ticks_position("bottom")
+        ax.yaxis.set_ticks_position("left")
 
         # Reverse x-axis if specified
-        if x_col in ['sort_rank', 'avgtk']:
+        if x_col in ["sort_rank", "avgtk"]:
             ax.invert_xaxis()
 
-        plt.grid(True, linestyle='--', alpha=0.7)
+        plt.grid(True, linestyle="--", alpha=0.7)
 
         df_sorted = df.sort_values(x_col).reset_index(drop=True)
-        texts = df_sorted['school_name'].tolist()
+        texts = df_sorted["school_name"].tolist()
         x_data = df_sorted[x_col].tolist()
-        y_data = df_sorted['median_earnings'].tolist()
+        y_data = df_sorted["median_earnings"].tolist()
 
         y_range = abs(plt.ylim()[1] - plt.ylim()[0])
         x_range = abs(plt.xlim()[1] - plt.xlim()[0])
@@ -235,22 +235,22 @@ def generate_all_plots():
         text_positions = get_text_positions(x_data, y_data, txt_width, txt_height)
         text_plotter(ax, x_data, y_data, text_positions, texts, txt_width, txt_height)
 
-        plt.xlabel(x_label, loc='right', fontsize=12, fontweight='bold')
-        plt.ylabel('Median Earnings ($)', loc='top', fontsize=12, fontweight='bold')
-        plt.legend(title='State', loc='center left', bbox_to_anchor=(1, 0.5),
-                   fontsize=10, frameon=True, facecolor='white', edgecolor='gray')
+        plt.xlabel(x_label, loc="right", fontsize=12, fontweight="bold")
+        plt.ylabel("Median Earnings ($)", loc="top", fontsize=12, fontweight="bold")
+        plt.legend(title="State", loc="center left", bbox_to_anchor=(1, 0.5),
+                   fontsize=10, frameon=True, facecolor="white", edgecolor="gray")
         plt.title(title, fontsize=14, pad=20)
         plt.tight_layout()
         plt.margins(x=0.1, y=0.1)
-        plt.savefig(f'plot/{x_col}_vs_median_earnings.png', bbox_inches='tight', dpi=300)
+        plt.savefig(f"plot/{x_col}_vs_median_earnings.png", bbox_inches="tight", dpi=300)
         plt.close()
 
     # Generate all plots
-    plot_scatter(df, state_style, 'sort_rank', 'School Rank (2026)', 'School Rank vs Median Earnings by State',
-                 df['sort_rank'].median())
-    plot_scatter(df, state_style, 'tuition_std', 'Standardized Tuition',
-                 'Standardized Tuition vs Median Earnings by State', 0)
-    plot_scatter(df, state_style, 'sat_score_std', 'Standardized SAT Score',
-                 'Standardized SAT Score vs Median Earnings by State', 0)
-    plot_scatter(df, state_style, 'avgtk', 'Avg Rk',
-                 'Avg Rank vs Median Earnings by State', df['avgtk'].median())
+    plot_scatter(df, state_style, "sort_rank", "School Rank (2026)", "School Rank vs Median Earnings by State",
+                 df["sort_rank"].median())
+    plot_scatter(df, state_style, "tuition_std", "Standardized Tuition",
+                 "Standardized Tuition vs Median Earnings by State", 0)
+    plot_scatter(df, state_style, "sat_score_std", "Standardized SAT Score",
+                 "Standardized SAT Score vs Median Earnings by State", 0)
+    plot_scatter(df, state_style, "avgtk", "Avg Rk",
+                 "Avg Rank vs Median Earnings by State", df["avgtk"].median())
