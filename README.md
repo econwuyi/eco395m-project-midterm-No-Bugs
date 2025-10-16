@@ -1,4 +1,16 @@
-# eco395m-project-midterm-No-Bugs
+# Rank, Score, and Success: Analyzing University Impact on Earnings   
+
+**Group Members**: Razan Almasood, Chenzi Jin, Yi Wu, Yuxin Zhao  
+
+## Project Abstract  
+This project aims to explore the relationship between university rankings, admission scores, and post-graduation earnings of students. To conduct the project, we first crawled data from the *U.S. News & World Report's Best Colleges Rankings*, including rankings, tuition, average SAT scores at admission, and state information for the top 50 U.S. universities in 2026. Next, we collected historical data and mean data from 2018 to 2025 for the *U.S. News* university rankings from Public University Honors for 160 universities. Subsequently, we gathered post-graduation earnings data for various universities from College Transitions.  
+After collecting the data, we integrated it into a cross-sectional dataset, including university names, states, yearly rankings from 2018 to 2026, average SAT scores at admission, and median post-graduation earnings. We then performed visualization and basic empirical analysis on the data. In the visualization section, we plotted the relationships between university rankings, admission SAT scores, and median earnings on a coordinate system, finding a strong correlation between SAT scores and median earnings, while the correlation between university rankings and earnings levels was weaker.  
+In the empirical analysis section, we conducted OLS regression on the cross-sectional data with tuition interaction terms, further providing empirical evidence for the trends observed in the visualizations. However, due to the data being at the university level and the lack of multi-year earnings, tuition, and SAT score data, the project cannot employ panel data analysis methods or conduct heterogeneity analysis, and the causality of the findings remains to be improved.  
+
+## Project Goal  
+1. Collect cross-sectional data at the university level through web scraping to enable preliminary analysis of earnings at the institutional level.  
+2. Use data visualization to display trends in the relationships between university rankings, admission SAT scores, and post-graduation earnings levels.  
+3. Employ basic empirical methods, introducing preliminary control variables and interaction terms, to demonstrate trends in the relationships between university rankings, admission SAT scores, and post-graduation earnings levels.  
 
 ## Sources of datasets  
 
@@ -24,6 +36,53 @@ The function will save results in the `artifacts/` and `plot/` folders. The arti
 `artifacts/cleaned_merged_dataset.csv`, the final cleaned and merged dataset. `artifacts/regression.csv`, the results of the regression analysis.  
 The `plot/` folder includes all visualization images generated from the analysis.
 
+## Visualization Findings  
+
+![Median Earnings vs SAT Scores](plot/sat_score_std_vs_median_earnings.png)
+
+### Strong Positive Correlation Between SAT Scores and Median Earnings  
+
+In the first plot (Standardized SAT Score vs Median Earnings), we observe a strong positive relationship: schools with higher average standardized SAT scores tend to have higher graduate median earnings.  
+- Institutions like MIT, Stanford, UPenn, and Brown cluster in the top-right quadrant, showing both high SAT scores and high earnings (above $120,000).  
+- In contrast, schools like Florida and Georgia have both lower SAT scores and lower earnings (around $60,000).  
+**SAT scores may proxy for student academic ability or selectivity, which appears linked to labor market outcomes.**  
+
+![Median Earnings vs 2026 Rankings](plot/sort_rank_vs_median_earnings.png)
+
+### School Rank Is Not a Perfect Predictor of Earnings  
+
+The second plot (School Rank vs Median Earnings) shows that rank alone doesn’t consistently predict graduate earnings.  
+- MIT and Caltech, ranked at the top, have extremely high earnings (above $140,000).  
+- However, Yale, Brown, and Chicago, despite top rankings, cluster near the $80,000 mark.  
+- Meanwhile, CMU and Georgia Tech, which are ranked lower, outperform in earnings—CMU exceeding $100,000.  
+**School prestige matters, but program strength, STEM focus, and employer perception may drive better earnings beyond rank.**  
+
+![Median Earnings vs Tuition](plot/tuition_std_vs_median_earnings.png)
+
+### Tuition Does Not Guarantee Higher Earnings  
+
+In the third plot (Standardized Tuition vs Median Earnings), we see that higher tuition doesn’t necessarily correspond with higher median salaries.  
+- High-tuition schools like MIT and Caltech do offer strong earnings.  
+- Yet schools like NYU, BU, and Tufts have similarly high tuitions but notably lower graduate earnings.  
+- On the other hand, Georgia Tech and Florida have below-average tuition but offer solid returns (especially Georgia Tech).  
+**Students should evaluate return-on-investment (ROI), not just sticker price—some public or lower-cost schools offer high economic mobility.**  
+
+![Median Earnings vs Average Rankings](plot/avgtk_vs_median_earnings.png)
+
+### Higher Average (Worse) School Rank Is Associated with Lower Median Earnings  
+
+In the fourth plot, we observe a clear negative relationship: schools with better average rankings tend to offer higher post-graduate earnings.  
+- MIT, Caltech, Harvard, Stanford, all with average rank near 0, consistently show the highest graduate earnings (above $120,000).  
+- In contrast, schools like BU, Georgia, Rochester, with average ranks above 40–50, are concentrated in the lower-right quadrant, showing lower median earnings (around $60,000–$70,000).  
+- Georgia Tech and Lehigh stand out slightly by outperforming others in their rank range, but still do not reach top-tier earning levels.  
+**Students from schools with consistently high rankings tend to earn more, likely due to stronger reputations, networks, and employer recognition. Average school rank is a reasonably good predictor of earnings potential.**
+
+### Geographic Trends and Regional Clustering  
+
+Color and shape coding by state reveals geographic patterns in performance:  
+- Northeastern states (e.g., MA, NY, PA) dominate the upper-right areas of several plots—hosting high-ranking, high-earning schools like Harvard, MIT, UPenn.  
+- Southern states (e.g., FL, GA) tend to cluster in lower-left quadrants with lower SAT, tuition, and earnings outcomes.  
+**State and region may influence outcomes due to factors like regional industry demand, alumni networks, and access to top employers.**
 
 ## Empirical Methodology  
 
@@ -96,6 +155,20 @@ If individual-level data are unavailable, we aim to collect more comprehensive u
 
 **Output File:**  `artifacts/tuition&sat_top50.csv`
 
+### Step 3: Graduate Earnings Data Collection
+
+**Contributor:** Yuxin Zhao  
+**File:** `code/data_collection.py`  
+**Function:** `scrape_college_earnings()`  
+
+- Scrapes graduate earnings data from the College Transitions website using requests and BeautifulSoup  
+- Extracts the institution names and corresponding median earnings 6 years after entry  
+- Skips invalid or missing entries (e.g., "--") during scraping to ensure clean and usable data  
+- Cleans and standardizes institution names for consistency with other datasets  
+- Stores the final cleaned results in CSV format under artifacts/graduate_earnings.csv  
+
+**Output File:**  `artifacts/graduate_earnings_data.csv`  
+
 ### Step 4: Average School Rank Collection
 
 **Contributor:** Yi Wu  
@@ -109,51 +182,31 @@ If individual-level data are unavailable, we aim to collect more comprehensive u
 - Saves results in CSV format under `artifacts/PUHranking.csv`
 
 **Output File:**  `artifacts/PUHranking.csv`
-**Output File:**  
-`artifacts/PUHranking.csv`
 
+### Step 5: 
 
-## Findings
+### Step 6: Visualization
 
-### Strong Positive Correlation Between SAT Scores and Median Earnings
+**Contributor:** Yuxin Zhao  
+**File:** `code/analysis.py`  
+**Function:** `generate_all_plots()`  
 
-**In the first plot (Standardized SAT Score vs Median Earnings), we observe a strong positive relationship: schools with higher average standardized SAT scores tend to have higher graduate median earnings.
-- Institutions like MIT, Stanford, UPenn, and Brown cluster in the top-right quadrant, showing both high SAT scores and high earnings (above $120,000).
-- In contrast, schools like Florida and Georgia have both lower SAT scores and lower earnings (around $60,000).
+To visually explore the relationship between school characteristics and graduate earnings, completed four distinct school-level scatter plots using Python (Matplotlib + Seaborn). Each plot normalizes key variables for comparability across institutions.  
+- All key variables (school_rank, sat_score, tuition, and median_earnings) were standardized to the [-1, 1] range using a min-max transformation.  
+- School names were replaced with shortened labels (e.g., “Massachusetts Institute of Technology” → “MIT”) for visual clarity.  
+- Each school was colored and shaped based on its U.S. state, improving regional interpretability.  
+- Each of the four finalized visualizations was saved as a .png file into the `plot/` subdirectory of the project’s GitHub repository. Based on the insights revealed in each visualization, forming a coherent data-driven discussion that connects the visual evidence to the project’s research question.
 
-**SAT scores may proxy for student academic ability or selectivity, which appears linked to labor market outcomes.
+**Output File:**  `plots/avgtk_vs_median_earnings.png`, `plots/sat_score_std_vs_median_earnings.png`, `plots/sort_rank_vs_median_earnings.png`, `plots/tuition_std_vs_median_earnings.png`
 
-###School Rank Is Not a Perfect Predictor of Earnings
+### Step 7: Empirical Analysis
 
-**The second plot (School Rank vs Median Earnings) shows that rank alone doesn’t consistently predict graduate earnings.
-- MIT and Caltech, ranked at the top, have extremely high earnings (above $140,000).
-- However, Yale, Brown, and Chicago, despite top rankings, cluster near the $80,000 mark.
-- Meanwhile, CMU and Georgia Tech, which are ranked lower, outperform in earnings—CMU exceeding $100,000.
+**Contributor:** Yi Wu  
+**File:** `code/analysis.py`  
+**Function:** `run_regressions()`  
 
-**School prestige matters, but program strength, STEM focus, and employer perception may drive better earnings beyond rank.
+- Perform regression with earnings level as the dependent variable, average ranking, tuition, and their interaction term as explanatory variables, clustering at the state level.  
+- Perform regression with earnings level as the dependent variable, average SAT score, tuition, and their interaction term as explanatory variables, clustering at the state level.  
+- Store the empirical results generated from the regression in a CSV file.  
 
-### Tuition Does Not Guarantee Higher Earnings
-
-**In the third plot (Standardized Tuition vs Median Earnings), we see that higher tuition doesn’t necessarily correspond with higher median salaries.
-- High-tuition schools like MIT and Caltech do offer strong earnings.
-- Yet schools like NYU, BU, and Tufts have similarly high tuitions but notably lower graduate earnings.
-- On the other hand, Georgia Tech and Florida have below-average tuition but offer solid returns (especially Georgia Tech).
-
-**Students should evaluate return-on-investment (ROI), not just sticker price—some public or lower-cost schools offer high economic mobility.
-
-### Higher Average (Worse) School Rank Is Associated with Lower Median Earnings
-
-**In the fourth plot, we observe a clear negative relationship: schools with better average rankings tend to offer higher post-graduate earnings.
-- MIT, Caltech, Harvard, Stanford, all with average rank near 0, consistently show the highest graduate earnings (above $120,000).
-- In contrast, schools like BU, Georgia, Rochester, with average ranks above 40–50, are concentrated in the lower-right quadrant, showing lower median earnings (around $60,000–$70,000).
-- Georgia Tech and Lehigh stand out slightly by outperforming others in their rank range, but still do not reach top-tier earning levels.
-
-**Students from schools with consistently high rankings tend to earn more, likely due to stronger reputations, networks, and employer recognition. Average school rank is a reasonably good predictor of earnings potential.
-
-### Geographic Trends and Regional Clustering
-
-**Color and shape coding by state reveals geographic patterns in performance:
-- Northeastern states (e.g., MA, NY, PA) dominate the upper-right areas of several plots—hosting high-ranking, high-earning schools like Harvard, MIT, UPenn.
-- Southern states (e.g., FL, GA) tend to cluster in lower-left quadrants with lower SAT, tuition, and earnings outcomes.
-
-**State and region may influence outcomes due to factors like regional industry demand, alumni networks, and access to top employers.
+**Output File:**  `artifacts/regression.csv`
