@@ -192,6 +192,10 @@ def generate_all_plots():
         ax.xaxis.set_ticks_position('bottom')
         ax.yaxis.set_ticks_position('left')
 
+        # Reverse x-axis if specified
+        if x_col in ['sort_rank', 'avgtk']:
+            ax.invert_xaxis()
+
         plt.grid(True, linestyle='--', alpha=0.7)
 
         df_sorted = df.sort_values(x_col).reset_index(drop=True)
@@ -224,4 +228,5 @@ def generate_all_plots():
                  'Standardized Tuition vs Median Earnings by State', 0)
     plot_scatter(df, state_style, 'sat_score_std', 'Standardized SAT Score',
                  'Standardized SAT Score vs Median Earnings by State', 0)
-    plot_scatter(df, state_style, 'avgtk', 'Avg TK', 'Avg TK vs Median Earnings by State', df['avgtk'].median())
+    plot_scatter(df, state_style, 'avgtk', 'Avg Rk',
+                 'Avg Rank vs Median Earnings by State', df['avgtk'].median())
