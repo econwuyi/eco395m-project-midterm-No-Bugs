@@ -158,7 +158,7 @@ If individual-level data are unavailable, we aim to collect more comprehensive u
 ### Step 3: Graduate Earnings Data Collection
 
 **Contributor:** Yuxin Zhao
-**File:** `code/data_collection`  
+**File:** `code/data_collection.py`  
 **Function:** `scrape_college_earnings()`
 
 - Scrapes graduate earnings data from the College Transitions website using requests and BeautifulSoup
@@ -182,5 +182,16 @@ If individual-level data are unavailable, we aim to collect more comprehensive u
 - Saves results in CSV format under `artifacts/PUHranking.csv`
 
 **Output File:**  `artifacts/PUHranking.csv`
-**Output File:**  
-`artifacts/PUHranking.csv`
+
+### Step 5: 
+
+### Step 6: Visualization
+**Contributor:** Yuxin Zhao
+**File:** `code/analysis.py` 
+**Function:** `generate_all_plots()`
+
+To visually explore the relationship between school characteristics and graduate earnings, completed four distinct school-level scatter plots using Python (Matplotlib + Seaborn). Each plot normalizes key variables for comparability across institutions.
+
+- All key variables (school_rank, sat_score, tuition, and median_earnings) were standardized to the [-1, 1] range using a min-max transformation.
+- School names were replaced with shortened labels (e.g., “Massachusetts Institute of Technology” → “MIT”) for visual clarity.
+- Each school was colored and shaped based on its U.S. state, improving regional interpretability.
