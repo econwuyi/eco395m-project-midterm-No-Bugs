@@ -141,14 +141,14 @@ If individual-level data are unavailable, we aim to collect more comprehensive u
 
 **Students should evaluate return-on-investment (ROI), not just sticker price—some public or lower-cost schools offer high economic mobility.
 
-### Average Class Size (Avg TK) Has Weak Correlation with Earnings
+### Higher Average (Worse) School Rank Is Associated with Lower Median Earnings
 
-**The fourth plot (Avg TK vs Median Earnings) suggests little to no clear correlation between average class size and graduate salaries.
-- Caltech and MIT—small class sizes, high earnings.
-- But Tufts, BU, Florida—also with small class sizes—show lower outcomes.
-- Meanwhile, Georgia Tech has large average class size but impressive earnings (~$95,000).
+**In the fourth plot, we observe a clear negative relationship: schools with better average rankings tend to offer higher post-graduate earnings.
+- MIT, Caltech, Harvard, Stanford, all with average rank near 0, consistently show the highest graduate earnings (above $120,000).
+- In contrast, schools like BU, Georgia, Rochester, with average ranks above 40–50, are concentrated in the lower-right quadrant, showing lower median earnings (around $60,000–$70,000).
+- Georgia Tech and Lehigh stand out slightly by outperforming others in their rank range, but still do not reach top-tier earning levels.
 
-**While small class sizes might enhance learning environments, they don’t translate directly to higher post-grad income.
+**Students from schools with consistently high rankings tend to earn more, likely due to stronger reputations, networks, and employer recognition. Average school rank is a reasonably good predictor of earnings potential.
 
 ### Geographic Trends and Regional Clustering
 
