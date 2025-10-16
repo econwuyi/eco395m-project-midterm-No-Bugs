@@ -1,4 +1,10 @@
-# eco395m-project-midterm-No-Bugs
+# eco395m-project-midterm-No-Bugs  
+
+**Group Members**: Razan Almasood, Chenzi Jin, Yi Wu, Yuxin Zhao  
+
+## Project Abstract
+
+## Project Goal
 
 ## Sources of datasets  
 
