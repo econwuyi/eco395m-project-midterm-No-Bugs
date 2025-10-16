@@ -205,8 +205,8 @@ To visually explore the relationship between school characteristics and graduate
 **File:** `code/analysis.py`  
 **Function:** `run_regressions()`  
 
--Perform regression with earnings level as the dependent variable, average ranking, tuition, and their interaction term as explanatory variables, clustering at the state level.  
--Perform regression with earnings level as the dependent variable, average SAT score, tuition, and their interaction term as explanatory variables, clustering at the state level.  
--Store the empirical results generated from the regression in a CSV file.  
+- Perform regression with earnings level as the dependent variable, average ranking, tuition, and their interaction term as explanatory variables, clustering at the state level.  
+- Perform regression with earnings level as the dependent variable, average SAT score, tuition, and their interaction term as explanatory variables, clustering at the state level.  
+- Store the empirical results generated from the regression in a CSV file.  
 
 **Output File:**  `artifacts/regression.csv`
