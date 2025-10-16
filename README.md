@@ -262,3 +262,12 @@ To visually explore the relationship between school characteristics and graduate
 
 **Output File:**  `artifacts/regression.csv`
 
+### Step 10: Organize the Code and Prepare the Report and Presentation
+
+**Contributor:** Ralmasood  
+**File:** `code/main.py`  
+
+- Integrated all major modules — `data_collection.py`, `data_cleaning.py`, and `analysis.py` — into a single unified pipeline (`main.py`).
+- Finalized and organized the code structure for clarity and reproducibility.
+- Prepared the project presentation summarizing objectives, methods, and key findings.
+
