@@ -185,7 +185,7 @@ If individual-level data are unavailable, we aim to collect more comprehensive u
 
 ## Step 5: Data Cleaning and Integration
 
-**Contributor**: Chenzi Jin  
+**Contributor**: chenzi JIN  
 **File**: `code/data_cleaning.py`    
 **Function**: `process_university_data()`
 
@@ -233,6 +233,8 @@ If individual-level data are unavailable, we aim to collect more comprehensive u
 - Reproducible cleaning pipeline ensuring consistent results
 
 This data cleaning phase transformed raw, disparate datasets into a polished analytical resource, enabling rigorous examination of the relationship between institutional prestige and graduate outcomes. 
+
+**Output File:**  `artifacts/cleaned_merged_dataset.csv`
 
 ### Step 6: Visualization
 
