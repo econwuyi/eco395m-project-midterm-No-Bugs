@@ -38,6 +38,8 @@ The `plot/` folder includes all visualization images generated from the analysis
 
 ## Visualization Findings  
 
+![Median Earnings vs Average Rankings](plot/avgtk_vs_median_earnings.png)
+
 ### Strong Positive Correlation Between SAT Scores and Median Earnings  
 
 In the first plot (Standardized SAT Score vs Median Earnings), we observe a strong positive relationship: schools with higher average standardized SAT scores tend to have higher graduate median earnings.  
