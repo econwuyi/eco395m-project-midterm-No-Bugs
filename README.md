@@ -198,3 +198,15 @@ To visually explore the relationship between school characteristics and graduate
 - Each of the four finalized visualizations was saved as a .png file into the `plot/` subdirectory of the project’s GitHub repository. Based on the insights revealed in each visualization, forming a coherent data-driven discussion that connects the visual evidence to the project’s research question.
 
 **Output File:**  `plots/avgtk_vs_median_earnings.png`, `plots/sat_score_std_vs_median_earnings.png`, `plots/sort_rank_vs_median_earnings.png`, `plots/tuition_std_vs_median_earnings.png`
+
+### Step 7: Empirical Analysis
+
+**Contributor:** Yi Wu  
+**File:** `code/analysis.py`  
+**Function:** `run_regressions()`  
+
+-Perform regression with earnings level as the dependent variable, average ranking, tuition, and their interaction term as explanatory variables, clustering at the state level.  
+-Perform regression with earnings level as the dependent variable, average SAT score, tuition, and their interaction term as explanatory variables, clustering at the state level.  
+-Store the empirical results generated from the regression in a CSV file.  
+
+**Output File:**  `artifacts/regression.csv`
