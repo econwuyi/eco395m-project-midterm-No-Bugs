@@ -32,7 +32,7 @@ The `plot/` folder includes all visualization images generated from the analysis
 ### Step 1: School Rank and State Data Collection
 
 **Contributor:** chenzi JIN  
-**File:** `code/data_collection.py`   
+**File:** `code/data_collection.py`     
 **Function:** `fetch_rankings_state()`
 
 - Collects top 50 university rankings and state data from US News API
