@@ -7,6 +7,8 @@ from data_collection import (
 
 from data_cleaning import process_university_data
 
+from analysis import run_regressions, generate_all_plots
+
 
 def main():
     print("Starting full data collection pipeline...\n")
@@ -29,8 +31,10 @@ def main():
     process_university_data()
 
     print("\nData cleaning and processing completed successfully.\n")
-
-
+    print("\nStep 6: Running regression and generating visual analysis...")
+    run_regressions()
+    generate_all_plots()
+    print("\nAnalysis completed successfully.")
 
 if __name__ == "__main__":
     main()
