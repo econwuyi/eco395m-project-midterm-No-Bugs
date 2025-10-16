@@ -65,6 +65,30 @@ def run_regressions(data_path='artifacts/cleaned_merged_dataset.csv', output_pat
 
 
 def generate_all_plots():
+    """
+    Generates four scatter plots comparing university median earnings against school rank, 
+    standardized tuition, SAT scores, and average rank. Uses state-specific markers and colors, 
+    with non-overlapping labels connected by fine black lines. Axes are oriented negative to positive (left-to-right, bottom-to-top).
+
+    Usage:
+        Run: `python analysis_data.py`
+        Or: `from analysis_data import generate_all_plots; generate_all_plots()`
+
+    Args:
+        None. Uses default CSV path 'artifacts/cleaned_merged_dataset.csv' with columns 
+         'school_name', 'state', 'sort_rank', 'tuition', 'sat_score', 'median_earnings', 'avgtk'.
+
+    Returns:
+        None. Saves four PNG files in 'plot' directory.
+
+    Requirements:
+        Install: `pip install pandas matplotlib seaborn numpy`
+        CSV file must be at specified path.
+
+    Notes:
+        Update `csv_path` in `generate_all_plots` if needed (e.g., 'C:/Users/YourUsername/Downloads/cleaned_merged_dataset.csv').
+        Adjust `txt_height`/`txt_width` in `plot_scatter` if labels overlap.
+    """
     # Default CSV path and create plot directory
     csv_path = 'artifacts/cleaned_merged_dataset.csv'
     os.makedirs('plot', exist_ok=True)

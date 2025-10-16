@@ -157,17 +157,17 @@ If individual-level data are unavailable, we aim to collect more comprehensive u
 
 ### Step 3: Graduate Earnings Data Collection
 
-**Contributor:** Yuxin Zhao
-**File:** `code/data_collection`  
-**Function:** `scrape_college_earnings()`
+**Contributor:** Yuxin Zhao  
+**File:** `code/data_collection.py`  
+**Function:** `scrape_college_earnings()`  
 
-- Scrapes graduate earnings data from the College Transitions website using requests and BeautifulSoup
-- Extracts the institution names and corresponding median earnings 6 years after entry
-- Skips invalid or missing entries (e.g., "--") during scraping to ensure clean and usable data
-- Cleans and standardizes institution names for consistency with other datasets
-- Stores the final cleaned results in CSV format under artifacts/graduate_earnings.csv
+- Scrapes graduate earnings data from the College Transitions website using requests and BeautifulSoup  
+- Extracts the institution names and corresponding median earnings 6 years after entry  
+- Skips invalid or missing entries (e.g., "--") during scraping to ensure clean and usable data  
+- Cleans and standardizes institution names for consistency with other datasets  
+- Stores the final cleaned results in CSV format under artifacts/graduate_earnings.csv  
 
-**Output File:**  `artifacts/graduate_earnings_data.csv`
+**Output File:**  `artifacts/graduate_earnings_data.csv`  
 
 ### Step 4: Average School Rank Collection
 
@@ -182,56 +182,32 @@ If individual-level data are unavailable, we aim to collect more comprehensive u
 - Saves results in CSV format under `artifacts/PUHranking.csv`
 
 **Output File:**  `artifacts/PUHranking.csv`
-**Output File:**  
-`artifacts/PUHranking.csv`
 
-## Step 5: Data Cleaning and Integration
+### Step 5: 
 
-**Contributor**: Chenzi Jin  
-**File**: `code/data_cleaning.py`  
-**Function**: `merge_university_data()`
+### Step 6: Visualization
 
-### Data Cleaning Methodology
+**Contributor:** Yuxin Zhao  
+**File:** `code/analysis.py`  
+**Function:** `generate_all_plots()`  
 
-**Integration Process:**
-- Merged 4 heterogeneous data sources into a unified analytical dataset
-- Standardized school names across all datasets, achieving 100% matching accuracy
-- Converted data types and formats (removed currency symbols, handled ranking notations)
-- Implemented systematic missing value identification and documentation
+To visually explore the relationship between school characteristics and graduate earnings, completed four distinct school-level scatter plots using Python (Matplotlib + Seaborn). Each plot normalizes key variables for comparability across institutions.  
+- All key variables (school_rank, sat_score, tuition, and median_earnings) were standardized to the [-1, 1] range using a min-max transformation.  
+- School names were replaced with shortened labels (e.g., “Massachusetts Institute of Technology” → “MIT”) for visual clarity.  
+- Each school was colored and shaped based on its U.S. state, improving regional interpretability.  
+- Each of the four finalized visualizations was saved as a .png file into the `plot/` subdirectory of the project’s GitHub repository. Based on the insights revealed in each visualization, forming a coherent data-driven discussion that connects the visual evidence to the project’s research question.
 
-**Key Technical Achievements:**
-- Developed modular cleaning functions for each data source
-- Used relative paths for reproducibility across different environments
-- Implemented robust error handling for file operations and data validation
-- Created comprehensive data quality reports with detailed diagnostics
+**Output File:**  `plots/avgtk_vs_median_earnings.png`, `plots/sat_score_std_vs_median_earnings.png`, `plots/sort_rank_vs_median_earnings.png`, `plots/tuition_std_vs_median_earnings.png`
 
-### Data Quality Assessment
+### Step 7: Empirical Analysis
 
-**Critical Data Insights Discovered:**
-- **Ranking System Characteristics**: 80% of schools (40/50) have tied rankings, with the largest group containing 5 institutions sharing rank #46
-- **Missing Data Documentation**: 
-  - 8 institutions missing SAT scores (primarily University of California system)
-  - 17 institutions missing graduate earnings data
-- **Data Completeness**: All 50 target institutions successfully integrated with complete ranking and tuition information
+**Contributor:** Yi Wu  
+**File:** `code/analysis.py`  
+**Function:** `run_regressions()`  
 
-### Output and Impact
+- Perform regression with earnings level as the dependent variable, average ranking, tuition, and their interaction term as explanatory variables, clustering at the state level.  
+- Perform regression with earnings level as the dependent variable, average SAT score, tuition, and their interaction term as explanatory variables, clustering at the state level.  
+- Store the empirical results generated from the regression in a CSV file.  
 
-**Deliverables:**
-- **Primary Output**: `artifacts/cleaned_merged_dataset.csv` - Unified dataset containing 17 variables across 50 institutions
-- **Data Validation**: Automated quality checks and comprehensive reporting
-- **Team Enablement**: Provided analysis-ready dataset for all subsequent visualization and regression tasks
+**Output File:**  `artifacts/regression.csv`
 
-**Technical Specifications:**
-- Dataset dimensions: 50 rows × 17 columns
-- Key variables: school_name, display_rank, sort_rank, is_tied, tuition, sat_score, median_earnings, state, historical rankings (2018-2025)
-- Format: Standardized CSV with consistent naming conventions
-
-### Data Limitations and Handling
-
-**Addressed Limitations:**
-- Transparent documentation of all missing values
-- Preservation of original ranking system characteristics (tied rankings)
-- Clear variable naming for easy interpretation by team members
-- Reproducible cleaning pipeline ensuring consistent results
-
-This data cleaning phase transformed raw, disparate datasets into a polished analytical resource, enabling rigorous examination of the relationship between institutional prestige and graduate outcomes.
