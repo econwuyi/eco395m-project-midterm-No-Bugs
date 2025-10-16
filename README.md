@@ -147,6 +147,20 @@ If individual-level data are unavailable, we aim to collect more comprehensive u
 
 **Output File:**  `artifacts/tuition&sat_top50.csv`
 
+### Step 3: Graduate Earnings Data Collection
+
+**Contributor:** Yuxin Zhao
+**File:** `code/data_collection`  
+**Function:** `scrape_college_earnings()`
+
+- Scrapes graduate earnings data from the College Transitions website using requests and BeautifulSoup
+- Extracts the institution names and corresponding median earnings 6 years after entry
+- Skips invalid or missing entries (e.g., "--") during scraping to ensure clean and usable data
+- Cleans and standardizes institution names for consistency with other datasets
+- Stores the final cleaned results in CSV format under artifacts/graduate_earnings.csv
+
+**Output File:**  `artifacts/graduate_earnings_data.csv`
+
 ### Step 4: Average School Rank Collection
 
 **Contributor:** Yi Wu  
