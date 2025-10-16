@@ -157,17 +157,17 @@ If individual-level data are unavailable, we aim to collect more comprehensive u
 
 ### Step 3: Graduate Earnings Data Collection
 
-**Contributor:** Yuxin Zhao
+**Contributor:** Yuxin Zhao  
 **File:** `code/data_collection.py`  
-**Function:** `scrape_college_earnings()`
+**Function:** `scrape_college_earnings()`  
 
-- Scrapes graduate earnings data from the College Transitions website using requests and BeautifulSoup
-- Extracts the institution names and corresponding median earnings 6 years after entry
-- Skips invalid or missing entries (e.g., "--") during scraping to ensure clean and usable data
-- Cleans and standardizes institution names for consistency with other datasets
-- Stores the final cleaned results in CSV format under artifacts/graduate_earnings.csv
+- Scrapes graduate earnings data from the College Transitions website using requests and BeautifulSoup  
+- Extracts the institution names and corresponding median earnings 6 years after entry  
+- Skips invalid or missing entries (e.g., "--") during scraping to ensure clean and usable data  
+- Cleans and standardizes institution names for consistency with other datasets  
+- Stores the final cleaned results in CSV format under artifacts/graduate_earnings.csv  
 
-**Output File:**  `artifacts/graduate_earnings_data.csv`
+**Output File:**  `artifacts/graduate_earnings_data.csv`  
 
 ### Step 4: Average School Rank Collection
 
@@ -187,13 +187,14 @@ If individual-level data are unavailable, we aim to collect more comprehensive u
 
 ### Step 6: Visualization
 
-**Contributor:** Yuxin Zhao
-**File:** `code/analysis.py` 
-**Function:** `generate_all_plots()`
+**Contributor:** Yuxin Zhao  
+**File:** `code/analysis.py`  
+**Function:** `generate_all_plots()`  
 
-To visually explore the relationship between school characteristics and graduate earnings, completed four distinct school-level scatter plots using Python (Matplotlib + Seaborn). Each plot normalizes key variables for comparability across institutions.
-
-- All key variables (school_rank, sat_score, tuition, and median_earnings) were standardized to the [-1, 1] range using a min-max transformation.
-- School names were replaced with shortened labels (e.g., “Massachusetts Institute of Technology” → “MIT”) for visual clarity.
-- Each school was colored and shaped based on its U.S. state, improving regional interpretability.
+To visually explore the relationship between school characteristics and graduate earnings, completed four distinct school-level scatter plots using Python (Matplotlib + Seaborn). Each plot normalizes key variables for comparability across institutions.  
+- All key variables (school_rank, sat_score, tuition, and median_earnings) were standardized to the [-1, 1] range using a min-max transformation.  
+- School names were replaced with shortened labels (e.g., “Massachusetts Institute of Technology” → “MIT”) for visual clarity.  
+- Each school was colored and shaped based on its U.S. state, improving regional interpretability.  
 - Each of the four finalized visualizations was saved as a .png file into the `plot/` subdirectory of the project’s GitHub repository. Based on the insights revealed in each visualization, forming a coherent data-driven discussion that connects the visual evidence to the project’s research question.
+
+**Output File:**  `plots/avgtk_vs_median_earnings.png`, `plots/sat_score_std_vs_median_earnings.png`, `plots/sort_rank_vs_median_earnings.png`, `plots/tuition_std_vs_median_earnings.png`
