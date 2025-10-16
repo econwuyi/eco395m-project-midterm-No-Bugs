@@ -29,17 +29,11 @@ The `plot/` folder includes all visualization images generated from the analysis
 
 We construct the following two regression models and estimate them using OLS with cross-sectional data, clustering standard errors at the state level:  
 
-**Regression 1:**  
+**Regression 1:**
+![Regression 1](https://latex.codecogs.com/png.latex?\text{MedianEarning}_i%20=%20\beta_0%20+%20\beta_1%20\text{AverageRank}_i%20+%20\beta_2%20\text{Tuition}_i%20+%20\beta_3%20(\text{AverageRank}_i%20\times%20\text{Tuition}_i)%20+%20\epsilon_i)
 
-\[
-\text{MedianEarning}_i = \beta_0 + \beta_1 \text{AverageRank}_i + \beta_2 \text{Tuition}_i + \beta_3 (\text{AverageRank}_i \times \text{Tuition}_i) + \epsilon_i
-\]
-
-**Regression 2:**  
-
-\[
-\text{MedianEarning}_i = \gamma_0 + \gamma_1 \text{SATScore}_i + \gamma_2 \text{Tuition}_i + \gamma_3 (\text{SATScore}_i \times \text{Tuition}_i) + \epsilon_i
-\]
+**Regression 2:**
+![Regression 2](https://latex.codecogs.com/png.latex?\text{MedianEarning}_i%20=%20\gamma_0%20+%20\gamma_1%20\text{SATScore}_i%20+%20\gamma_2%20\text{Tuition}_i%20+%20\gamma_3%20(\text{SATScore}_i%20\times%20\text{Tuition}_i)%20+%20\epsilon_i)
 
 ## Empirical Findings  
 
@@ -100,8 +94,7 @@ If individual-level data are unavailable, we aim to collect more comprehensive u
 - Includes progress logging and error handling for  
 - Tested locally with successful data export   
 
-**Output File:**  
-`artifacts/tuition&sat_top50.csv`
+**Output File:**  `artifacts/tuition&sat_top50.csv`
 
 ### Step 4: Average School Rank Collection
 
@@ -115,7 +108,4 @@ If individual-level data are unavailable, we aim to collect more comprehensive u
 - Matches school names, updating top-ranked schools to their official names for easier data cleaning
 - Saves results in CSV format under `artifacts/PUHranking.csv`
 
-**Output File:**  
-`artifacts/PUHranking.csv`
-
-`
+**Output File:**  `artifacts/PUHranking.csv`
