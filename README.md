@@ -109,3 +109,51 @@ If individual-level data are unavailable, we aim to collect more comprehensive u
 - Saves results in CSV format under `artifacts/PUHranking.csv`
 
 **Output File:**  `artifacts/PUHranking.csv`
+**Output File:**  
+`artifacts/PUHranking.csv`
+
+
+## Findings
+
+### Strong Positive Correlation Between SAT Scores and Median Earnings
+
+**In the first plot (Standardized SAT Score vs Median Earnings), we observe a strong positive relationship: schools with higher average standardized SAT scores tend to have higher graduate median earnings.
+- Institutions like MIT, Stanford, UPenn, and Brown cluster in the top-right quadrant, showing both high SAT scores and high earnings (above $120,000).
+- In contrast, schools like Florida and Georgia have both lower SAT scores and lower earnings (around $60,000).
+
+**SAT scores may proxy for student academic ability or selectivity, which appears linked to labor market outcomes.
+
+###School Rank Is Not a Perfect Predictor of Earnings
+
+**The second plot (School Rank vs Median Earnings) shows that rank alone doesn’t consistently predict graduate earnings.
+- MIT and Caltech, ranked at the top, have extremely high earnings (above $140,000).
+- However, Yale, Brown, and Chicago, despite top rankings, cluster near the $80,000 mark.
+- Meanwhile, CMU and Georgia Tech, which are ranked lower, outperform in earnings—CMU exceeding $100,000.
+
+**School prestige matters, but program strength, STEM focus, and employer perception may drive better earnings beyond rank.
+
+### Tuition Does Not Guarantee Higher Earnings
+
+**In the third plot (Standardized Tuition vs Median Earnings), we see that higher tuition doesn’t necessarily correspond with higher median salaries.
+- High-tuition schools like MIT and Caltech do offer strong earnings.
+- Yet schools like NYU, BU, and Tufts have similarly high tuitions but notably lower graduate earnings.
+- On the other hand, Georgia Tech and Florida have below-average tuition but offer solid returns (especially Georgia Tech).
+
+**Students should evaluate return-on-investment (ROI), not just sticker price—some public or lower-cost schools offer high economic mobility.
+
+### Average Class Size (Avg TK) Has Weak Correlation with Earnings
+
+**The fourth plot (Avg TK vs Median Earnings) suggests little to no clear correlation between average class size and graduate salaries.
+- Caltech and MIT—small class sizes, high earnings.
+- But Tufts, BU, Florida—also with small class sizes—show lower outcomes.
+- Meanwhile, Georgia Tech has large average class size but impressive earnings (~$95,000).
+
+**While small class sizes might enhance learning environments, they don’t translate directly to higher post-grad income.
+
+### Geographic Trends and Regional Clustering
+
+**Color and shape coding by state reveals geographic patterns in performance:
+- Northeastern states (e.g., MA, NY, PA) dominate the upper-right areas of several plots—hosting high-ranking, high-earning schools like Harvard, MIT, UPenn.
+- Southern states (e.g., FL, GA) tend to cluster in lower-left quadrants with lower SAT, tuition, and earnings outcomes.
+
+**State and region may influence outcomes due to factors like regional industry demand, alumni networks, and access to top employers.
