@@ -2,7 +2,10 @@
 
 **Group Members**: Razan Almasood, Chenzi Jin, Yi Wu, Yuxin Zhao  
 
-## Project Abstract
+## Project Abstract  
+This project aims to explore the relationship between university rankings, admission scores, and post-graduation earnings of students. To conduct the project, we first crawled data from the *U.S. News & World Report's Best Colleges Rankings*, including rankings, tuition, average SAT scores at admission, and state information for the top 50 U.S. universities in 2026. Next, we collected historical data and mean data from 2018 to 2025 for the *U.S. News* university rankings from Public University Honors for 160 universities. Subsequently, we gathered post-graduation earnings data for various universities from College Transitions.  
+After collecting the data, we integrated it into a cross-sectional dataset, including university names, states, yearly rankings from 2018 to 2026, average SAT scores at admission, and median post-graduation earnings. We then performed visualization and basic empirical analysis on the data. In the visualization section, we plotted the relationships between university rankings, admission SAT scores, and median earnings on a coordinate system, finding a strong correlation between SAT scores and median earnings, while the correlation between university rankings and earnings levels was weaker.  
+In the empirical analysis section, we conducted OLS regression on the cross-sectional data with tuition interaction terms, further providing empirical evidence for the trends observed in the visualizations. However, due to the data being at the university level and the lack of multi-year earnings, tuition, and SAT score data, the project cannot employ panel data analysis methods or conduct heterogeneity analysis, and the causality of the findings remains to be improved.  
 
 ## Project Goal
 
