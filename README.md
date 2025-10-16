@@ -183,7 +183,56 @@ If individual-level data are unavailable, we aim to collect more comprehensive u
 
 **Output File:**  `artifacts/PUHranking.csv`
 
-### Step 5: 
+## Step 5: Data Cleaning and Integration
+
+**Contributor**: Chenzi Jin  
+**File**: `code/data_cleaning.py`    
+**Function**: `process_university_data()`
+
+### Data Cleaning Methodology
+
+**Integration Process:**
+- Merged 4 heterogeneous data sources into a unified analytical dataset
+- Standardized school names across all datasets, achieving 100% matching accuracy
+- Converted data types and formats (removed currency symbols, handled ranking notations)
+- Implemented systematic missing value identification and documentation
+
+**Key Technical Achievements:**
+- Developed modular cleaning functions for each data source
+- Used relative paths for reproducibility across different environments
+- Implemented robust error handling for file operations and data validation
+- Created comprehensive data quality reports with detailed diagnostics
+
+### Data Quality Assessment
+
+**Critical Data Insights Discovered:**
+- **Ranking System Characteristics**: 80% of schools (40/50) have tied rankings, with the largest group containing 5 institutions sharing rank #46
+- **Missing Data Documentation**: 
+  - 8 institutions missing SAT scores (primarily University of California system)
+  - 17 institutions missing graduate earnings data
+- **Data Completeness**: All 50 target institutions successfully integrated with complete ranking and tuition information
+
+### Output and Impact
+
+**Deliverables:**
+- **Primary Output**: `artifacts/cleaned_merged_dataset.csv` - Unified dataset containing 17 variables across 50 institutions
+- **Data Validation**: Automated quality checks and comprehensive reporting
+- **Team Enablement**: Provided analysis-ready dataset for all subsequent visualization and regression tasks
+
+**Technical Specifications:**
+- Dataset dimensions: 50 rows × 17 columns
+- Key variables: school_name, display_rank, sort_rank, is_tied, tuition, sat_score, median_earnings, state, historical rankings (2018-2025)
+- Format: Standardized CSV with consistent naming conventions
+
+### Data Limitations and Handling
+
+**Addressed Limitations:**
+- Transparent documentation of all missing values
+- Preservation of original ranking system characteristics (tied rankings)
+- Clear variable naming for easy interpretation by team members
+- Reproducible cleaning pipeline ensuring consistent results
+
+This data cleaning phase transformed raw, disparate datasets into a polished analytical resource, enabling rigorous examination of the relationship between institutional prestige and graduate outcomes. 
 
 ### Step 6: Visualization
 
