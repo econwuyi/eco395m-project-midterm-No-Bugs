@@ -29,6 +29,22 @@ The `plot/` folder includes all visualization images generated from the analysis
 
 ## Workflow  
 
+### Step 1: School Rank and State Data Collection
+
+**Contributor:** chenzi JIN  
+**File:** `code/ranking_state.py`  
+**Function:** `fetch_usnews_rankings()`
+
+- Collects top 50 university rankings and state data from US News API
+- Uses official API endpoint with proper sorting by ranking position
+- Implements pagination to ensure complete data collection
+- Handles JSON data extraction with error handling
+- Saves structured data to CSV format using relative paths
+- Tested locally with successful generation of rankings dataset
+
+**Output File:**
+`artifacts/usnews_top50.csv`
+
 ### Step 2: Tuition and SAT Data Collection
 
 **Contributor:** Ralmasood  
