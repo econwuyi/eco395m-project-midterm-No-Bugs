@@ -96,6 +96,8 @@ We construct the following two regression models and estimate them using OLS wit
 
 ## Empirical Findings  
 
+<img width="869" height="349" alt="image" src="https://github.com/user-attachments/assets/26feae3e-d02e-4228-9992-7a1d256f22e0" />
+
 ### Regression 1:  
 At the 10% significance level, a one-unit increase in a university's average ranking (lower rank number indicates a better ranking) is associated with a significant increase of $2,684 in students' median earnings six years post-graduation. However, neither tuition nor the interaction term between average rank and tuition is statistically significant.  
 
@@ -254,7 +256,7 @@ To visually explore the relationship between school characteristics and graduate
 
 **Output File:**  `artifacts/regression.csv`
 
-### Step 10: Organize the Code and Prepare the Report and Presentation
+### Step 8: Organize the Code and Prepare the Report and Presentation
 
 **Contributor:** Ralmasood  
 **File:** `code/main.py`  
