@@ -38,7 +38,7 @@ The `plot/` folder includes all visualization images generated from the analysis
 
 ## Visualization Findings  
 
-![Median Earnings vs Average Rankings](plot/avgtk_vs_median_earnings.png)
+![Median Earnings vs SAT Scores](plot/sat_score_std_vs_median_earnings.png)
 
 ### Strong Positive Correlation Between SAT Scores and Median Earnings  
 
@@ -46,6 +46,8 @@ In the first plot (Standardized SAT Score vs Median Earnings), we observe a stro
 - Institutions like MIT, Stanford, UPenn, and Brown cluster in the top-right quadrant, showing both high SAT scores and high earnings (above $120,000).  
 - In contrast, schools like Florida and Georgia have both lower SAT scores and lower earnings (around $60,000).  
 **SAT scores may proxy for student academic ability or selectivity, which appears linked to labor market outcomes.**  
+
+![Median Earnings vs 2026 Rankings](plot/sort_rank_vs_median_earnings.png)
 
 ### School Rank Is Not a Perfect Predictor of Earnings  
 
@@ -55,6 +57,8 @@ The second plot (School Rank vs Median Earnings) shows that rank alone doesn’t
 - Meanwhile, CMU and Georgia Tech, which are ranked lower, outperform in earnings—CMU exceeding $100,000.  
 **School prestige matters, but program strength, STEM focus, and employer perception may drive better earnings beyond rank.**  
 
+![Median Earnings vs Tuition](plot/tuition_std_vs_median_earnings.png)
+
 ### Tuition Does Not Guarantee Higher Earnings  
 
 In the third plot (Standardized Tuition vs Median Earnings), we see that higher tuition doesn’t necessarily correspond with higher median salaries.  
@@ -62,6 +66,8 @@ In the third plot (Standardized Tuition vs Median Earnings), we see that higher 
 - Yet schools like NYU, BU, and Tufts have similarly high tuitions but notably lower graduate earnings.  
 - On the other hand, Georgia Tech and Florida have below-average tuition but offer solid returns (especially Georgia Tech).  
 **Students should evaluate return-on-investment (ROI), not just sticker price—some public or lower-cost schools offer high economic mobility.**  
+
+![Median Earnings vs Average Rankings](plot/avgtk_vs_median_earnings.png)
 
 ### Higher Average (Worse) School Rank Is Associated with Lower Median Earnings  
 
